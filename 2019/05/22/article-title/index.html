@@ -5,16 +5,20 @@
   
 
   
-  <title>article title | Hexo</title>
+  <title>剑指offer01  二叉搜索树的后序遍历序列 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="article title">
+  <meta name="description" content="//二叉搜索树：左子结点 &amp;lt; 根结点 &amp;lt; 右子结点//后序遍历：5 8 7 | 11 13 12 | 9 根结点为9 左子树为5 8 7 右子树为 11 13 12//后序遍历要合法 需要左子树都小于根结点 右子树都大于根结点 且左右子树也要合法 class Solution { public boolean VerifySquenceOfBST(int[] sequence) {">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer01  二叉搜索树的后序遍历序列">
 <meta property="og:url" content="http://yoursite.com/2019/05/22/article-title/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="//二叉搜索树：左子结点 &amp;lt; 根结点 &amp;lt; 右子结点//后序遍历：5 8 7 | 11 13 12 | 9 根结点为9 左子树为5 8 7 右子树为 11 13 12//后序遍历要合法 需要左子树都小于根结点 右子树都大于根结点 且左右子树也要合法 class Solution { public boolean VerifySquenceOfBST(int[] sequence) {">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-22T06:04:37.096Z">
+<meta property="og:updated_time" content="2019-05-22T06:23:31.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="article title">
+<meta name="twitter:title" content="剑指offer01  二叉搜索树的后序遍历序列">
+<meta name="twitter:description" content="//二叉搜索树：左子结点 &amp;lt; 根结点 &amp;lt; 右子结点//后序遍历：5 8 7 | 11 13 12 | 9 根结点为9 左子树为5 8 7 右子树为 11 13 12//后序遍历要合法 需要左子树都小于根结点 右子树都大于根结点 且左右子树也要合法 class Solution { public boolean VerifySquenceOfBST(int[] sequence) {">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -75,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      article title
+      剑指offer01  二叉搜索树的后序遍历序列
     </h1>
   
 
@@ -83,13 +87,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>//二叉搜索树：左子结点 &lt; 根结点 &lt; 右子结点<br>//后序遍历：5 8 7 | 11 13 12 | 9 根结点为9 左子树为5 8 7 右子树为 11 13 12<br>//后序遍历要合法 需要左子树都小于根结点 右子树都大于根结点 且左右子树也要合法</p>
+<p>class Solution {</p>
+<pre><code>public boolean VerifySquenceOfBST(int[] sequence) {
+
+    if (sequence.length == 0) {
+
+        return false;
+
+    } else {
+
+        return isBST(sequence, 0, sequence.length - 1);
+    }
+}
+
+private boolean isBST(int[] seq, int start, int end) {
+
+    if (start &gt;= end) {
+
+        return true;
+    }
+
+    //右子结点段首元素
+    int index = start;
+
+    //写成如下形式不妥：
+    //例如：1，2，3，4，5   index=0 期望index=end=4
+</code></pre><p>//        for (int i=start; i&lt;end; i++) {<br>//<br>//            if(seq[i] &gt; seq[end]) {<br>//<br>//                index = i;<br>//                break;<br>//            }<br>//        }</p>
+<pre><code>    while (seq[index] &lt; seq[end]) {
+
+        index++;
+    }
+
+    //右子结点段是否都大于根结点(数组末尾元素)
+    for (int i = index; i &lt; end; i++) {
+
+        if (seq[i] &lt; seq[end]) {
+
+            return false;
+        }
+    }
+
+    return isBST(seq, start, index - 1) &amp;&amp; isBST(seq, index, end - 1);
+}
+</code></pre><p>}</p>
+<p>public class Main {</p>
+<pre><code>public static void main(String[] args) {
+
+    Solution solution = new Solution();
+    int[] seq = {1, 2, 3, 4, 5};
+    System.out.println(solution.VerifySquenceOfBST(seq));
+}
+</code></pre><p>}</p>
+<p><a href="https://github.com/NjustJiaweihan/NewCoder_JianZhiOffer" target="_blank" rel="noopener">源码地址</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/22/article-title/" data-id="cjvytq1al0000o8d4ucx846db" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/22/article-title/" data-id="cjvyudlkv00001cd41a0svr95" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/剑指offer/">剑指offer</a></li></ul>
+
     </footer>
   </div>
   
@@ -115,9 +174,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指offer/">剑指offer</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/剑指offer/" style="font-size: 10px;">剑指offer</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -136,7 +209,7 @@
       <ul>
         
           <li>
-            <a href="/2019/05/22/article-title/">article title</a>
+            <a href="/2019/05/22/article-title/">剑指offer01  二叉搜索树的后序遍历序列</a>
           </li>
         
           <li>
