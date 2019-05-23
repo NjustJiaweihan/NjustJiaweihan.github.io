@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Deep&#39;s HomePage">
 <meta property="og:description" content="在学习Spring + Mybatis开发的时候需要安装Maven遇到一些问题，在此记录一下">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T02:26:15.610Z">
+<meta property="og:updated_time" content="2019-05-23T02:28:30.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven install + 搭建项目文件骨架">
 <meta name="twitter:description" content="在学习Spring + Mybatis开发的时候需要安装Maven遇到一些问题，在此记录一下">
@@ -310,9 +310,9 @@
 <li>之前设置了vim主题 导致报错:E249 colorsheme blackdark<br> 进入vim的配置文件.vimrc进行修改 删除了colorsheme blackdark<br>2: vim的相关操作<br> :i 修改vim文件<br> :wq 保存修改并退出</li>
 </ol>
 <p>Maven-3.2.3 install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=/Users/njusthanjiawei/maven/apache-maven-3.2.3/bin:$PATH</span><br><span class="line">$ mvn -v</span><br></pre></td></tr></table></figure></p>
-<p>maven 创建项目文件骨架<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mvn archetype:generate -DgroupId=org.seckill -DartifactId=seckill -DarchetypeArtifacId=maven-archetype-webapp -DarchetypeCatalog=internal</span><br></pre></td></tr></table></figure></p>
-<p>参数选择 7: 10<br>10: internal -&gt; org.apache.maven.archetypes:maven-archetype-webapp (An archetype which contains a sample Maven Webapp project.)</p>
-
+<p>maven 创建项目文件骨架<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mvn archetype:generate </span><br><span class="line">    -DgroupId=org.seckill </span><br><span class="line">    -DartifactId=seckill </span><br><span class="line">    -DarchetypeArtifacId=maven-archetype-webapp </span><br><span class="line">    -DarchetypeCatalog=internal</span><br></pre></td></tr></table></figure></p>
+<p>参数选择 7: 10</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10: internal -&gt; org.apache.maven.archetypes:</span><br><span class="line">                maven-archetype-webapp </span><br><span class="line">                (An archetype which contains a sample Maven Webapp project.)</span><br></pre></td></tr></table></figure>
       
     </div>
     
