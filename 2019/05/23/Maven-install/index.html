@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="由于安装JKD的时候没有配置JAVA_HOME 导致mvn报错12$ mvn -vError: JAVA_HOME is not defined correctly. 故开始配置JAVA_HOME1: 查看自己的jdk版本    1$ /usr/libexec/java_home -V 2: Mac系统默认我们要编辑的文件是只读模式，所以先修改文件权限    1$ sudo chmod 777 .">
+<meta name="description" content="在学习Spring + Mybatis开发的时候需要安装Maven遇到一些问题，在此记录一下">
 <meta name="keywords" content="software install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven install + 搭建项目文件骨架">
 <meta property="og:url" content="http://yoursite.com/2019/05/23/Maven-install/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
-<meta property="og:description" content="由于安装JKD的时候没有配置JAVA_HOME 导致mvn报错12$ mvn -vError: JAVA_HOME is not defined correctly. 故开始配置JAVA_HOME1: 查看自己的jdk版本    1$ /usr/libexec/java_home -V 2: Mac系统默认我们要编辑的文件是只读模式，所以先修改文件权限    1$ sudo chmod 777 .">
+<meta property="og:description" content="在学习Spring + Mybatis开发的时候需要安装Maven遇到一些问题，在此记录一下">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T02:05:15.652Z">
+<meta property="og:updated_time" content="2019-05-23T02:26:15.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven install + 搭建项目文件骨架">
-<meta name="twitter:description" content="由于安装JKD的时候没有配置JAVA_HOME 导致mvn报错12$ mvn -vError: JAVA_HOME is not defined correctly. 故开始配置JAVA_HOME1: 查看自己的jdk版本    1$ /usr/libexec/java_home -V 2: Mac系统默认我们要编辑的文件是只读模式，所以先修改文件权限    1$ sudo chmod 777 .">
+<meta name="twitter:description" content="在学习Spring + Mybatis开发的时候需要安装Maven遇到一些问题，在此记录一下">
 
 
 
@@ -300,7 +300,7 @@
       
 
       
-        <p>由于安装JKD的时候没有配置JAVA_HOME 导致mvn报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mvn -v</span><br><span class="line">Error: JAVA_HOME is not defined correctly.</span><br></pre></td></tr></table></figure></p>
+        <p>在学习Spring + Mybatis开发的时候需要安装Maven<br>遇到一些问题，在此记录一下<br><a id="more"></a><br>由于安装JKD的时候没有配置JAVA_HOME 导致mvn报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mvn -v</span><br><span class="line">Error: JAVA_HOME is not defined correctly.</span><br></pre></td></tr></table></figure></p>
 <p>故开始配置JAVA_HOME<br>1: 查看自己的jdk版本<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/libexec/java_home -V</span><br></pre></td></tr></table></figure></p>
 <p>2: Mac系统默认我们要编辑的文件是只读模式，所以先修改文件权限<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod 777 .bash_profile</span><br></pre></td></tr></table></figure></p>
 <p>3: 修改.bash_profile 加入以下语句<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ vim .bash_profile</span><br><span class="line">    JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home</span><br><span class="line">    PATH=$JAVA_HOME/bin:$PATH:.</span><br><span class="line">    CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:.</span><br><span class="line">    export JAVA_HOME</span><br><span class="line">    export PATH</span><br><span class="line">    export CLASSPATH</span><br></pre></td></tr></table></figure></p>
