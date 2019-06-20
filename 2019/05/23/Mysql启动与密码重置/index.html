@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Deep&#39;s HomePage">
 <meta property="og:description" content="主要是解决了Mysql安装后不能用mysql命令启动的问题另外就是重置了我Mysql的密码">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T11:53:05.516Z">
+<meta property="og:updated_time" content="2019-06-20T06:28:41.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql启动与密码重置">
 <meta name="twitter:description" content="主要是解决了Mysql安装后不能用mysql命令启动的问题另外就是重置了我Mysql的密码">
@@ -335,7 +335,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  197
+                  200
                 </span>
               
 
@@ -363,14 +363,19 @@
         <p>主要是解决了Mysql安装后不能用mysql命令启动的问题<br>另外就是重置了我Mysql的密码</p>
 <a id="more"></a>
 <p>配置环境变量</p>
-<p>1.进入.bash_profile文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vim ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
-<p>2.输入 :i进入编辑<br>3.配置环境变量<br>    <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias mysql=/usr/local/mysql/bin/mysql</span><br><span class="line">alias mysqladmin=/usr/local/mysql/bin/mysqladmin</span><br></pre></td></tr></table></figure></p>
-<pre><code>按esc键, 输入 :wq 即保存退出
-</code></pre><p>我的问题主要是mysql环境变量配置好后 依然没有权限连接<br>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’</p>
-<p>解决方法就是重置密码<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo chmod 777 /usr/local/mysql/data/</span><br><span class="line"><span class="meta">$</span> cd /usr/local/mysql/data/</span><br><span class="line"><span class="meta">$</span> sudo chmod 777  ib_logfile0</span><br><span class="line"><span class="meta">$</span> sudo chmod 777  ib_logfile1</span><br><span class="line"><span class="meta">$</span> rm ib_logfile0</span><br><span class="line"><span class="meta">$</span> rm ib_logfile1</span><br></pre></td></tr></table></figure></p>
-<p>—-在系统偏好中停用MySQL<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd /usr/local/mysql/bin/</span><br><span class="line"><span class="meta">$</span> sudo su</span><br><span class="line"><span class="meta">$</span>shell ./mysqld_safe --skip-grant-tables &amp; </span><br><span class="line"><span class="meta">$</span>shell ./mysql</span><br><span class="line"><span class="meta">mysql-&gt;</span> FLUSH PRIVILEGES; </span><br><span class="line"><span class="meta">mysql-&gt;</span> ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';</span><br></pre></td></tr></table></figure></p>
-<p>登陆Mysql<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mysql -uroot -p</span><br><span class="line">password:</span><br></pre></td></tr></table></figure></p>
+<p>1.进入.bash_profile文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>2.输入 :i进入编辑<br>3.配置环境变量</p>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias mysql=/usr/local/mysql/bin/mysql</span><br><span class="line">alias mysqladmin=/usr/local/mysql/bin/mysqladmin</span><br></pre></td></tr></table></figure>
 
+按esc键, 输入 :wq 即保存退出
+</code></pre><p>我的问题主要是mysql环境变量配置好后 依然没有权限连接<br>ERROR 1045 (28000): Access denied for user ‘root‘@’localhost’</p>
+<p>解决方法就是重置密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo chmod 777 /usr/local/mysql/data/</span><br><span class="line"><span class="meta">$</span> cd /usr/local/mysql/data/</span><br><span class="line"><span class="meta">$</span> sudo chmod 777  ib_logfile0</span><br><span class="line"><span class="meta">$</span> sudo chmod 777  ib_logfile1</span><br><span class="line"><span class="meta">$</span> rm ib_logfile0</span><br><span class="line"><span class="meta">$</span> rm ib_logfile1</span><br></pre></td></tr></table></figure>
+<p>—-在系统偏好中停用MySQL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd /usr/local/mysql/bin/</span><br><span class="line"><span class="meta">$</span> sudo su</span><br><span class="line"><span class="meta">$</span>shell ./mysqld_safe --skip-grant-tables &amp; </span><br><span class="line"><span class="meta">$</span>shell ./mysql</span><br><span class="line"><span class="meta">mysql-&gt;</span> FLUSH PRIVILEGES; </span><br><span class="line"><span class="meta">mysql-&gt;</span> ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';</span><br></pre></td></tr></table></figure>
+<p>登陆Mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mysql -uroot -p</span><br><span class="line">password:</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -522,7 +527,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
