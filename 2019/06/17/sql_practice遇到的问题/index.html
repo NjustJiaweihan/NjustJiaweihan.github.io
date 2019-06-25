@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sql,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content=".sql文件和题目明天上传。">
+<meta name="keywords" content="sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql语句练习题">
+<meta property="og:url" content="http://yoursite.com/2019/06/17/sql_practice遇到的问题/index.html">
+<meta property="og:site_name" content="Deep&#39;s HomePage">
+<meta property="og:description" content=".sql文件和题目明天上传。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-17T01:41:40.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql语句练习题">
+<meta name="twitter:description" content=".sql文件和题目明天上传。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/17/sql_practice遇到的问题/">
+
+
+
+
+
+  <title>sql语句练习题 | Deep's HomePage</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Deep's HomePage</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/sql_practice遇到的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deep">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Deep's HomePage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sql语句练习题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-17T22:54:54+08:00">
+                2019-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/17/sql_practice遇到的问题/" class="leancloud_visitors" data-flag-title="sql语句练习题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>.sql文件和题目明天上传。</p>
+<a id="more"></a>
+<p><a href="参考阅读：https://www.zhihu.com/question/19552975">[参考阅读]</a></p>
+<h2><span id="练习题">练习题</span></h2><p>原作者使用的是Mysql5.0 我使用的版本是Mysql5.7 修改了部分不再能运行的答案 并把sql语句返回结果也摘录下来了。</p>
+<h3><span id="表结构">表结构</span></h3><p>也可以选择直接运行navicat导出的<a href>.sql文件</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> STUDENT</span><br><span class="line">(SNO <span class="built_in">VARCHAR</span>(<span class="number">3</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">SNAME <span class="built_in">VARCHAR</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">SSEX <span class="built_in">VARCHAR</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">SBIRTHDAY DATETIME,</span><br><span class="line"><span class="keyword">CLASS</span> <span class="built_in">VARCHAR</span>(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> COURSE</span><br><span class="line">(CNO <span class="built_in">VARCHAR</span>(<span class="number">5</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">CNAME <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">TNO <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> SCORE </span><br><span class="line">(SNO <span class="built_in">VARCHAR</span>(<span class="number">3</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">CNO <span class="built_in">VARCHAR</span>(<span class="number">5</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">DEGREE <span class="built_in">NUMERIC</span>(<span class="number">10</span>, <span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TEACHER </span><br><span class="line">(TNO <span class="built_in">VARCHAR</span>(<span class="number">3</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">TNAME <span class="built_in">VARCHAR</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, TSEX <span class="built_in">VARCHAR</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">TBIRTHDAY DATETIME <span class="keyword">NOT</span> <span class="literal">NULL</span>, PROF <span class="built_in">VARCHAR</span>(<span class="number">6</span>), </span><br><span class="line">DEPART <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">108</span> ,<span class="string">'曾华'</span> </span><br><span class="line">,<span class="string">'男'</span> ,<span class="number">1977</span><span class="number">-09</span><span class="number">-01</span>,<span class="number">95033</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">105</span> ,<span class="string">'匡明'</span> </span><br><span class="line">,<span class="string">'男'</span> ,<span class="number">1975</span><span class="number">-10</span><span class="number">-02</span>,<span class="number">95031</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">107</span> ,<span class="string">'王丽'</span> </span><br><span class="line">,<span class="string">'女'</span> ,<span class="number">1976</span><span class="number">-01</span><span class="number">-23</span>,<span class="number">95033</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">101</span> ,<span class="string">'李军'</span> </span><br><span class="line">,<span class="string">'男'</span> ,<span class="number">1976</span><span class="number">-02</span><span class="number">-20</span>,<span class="number">95033</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">109</span> ,<span class="string">'王芳'</span> </span><br><span class="line">,<span class="string">'女'</span> ,<span class="number">1975</span><span class="number">-02</span><span class="number">-10</span>,<span class="number">95031</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> STUDENT (SNO,SNAME,SSEX,SBIRTHDAY,<span class="keyword">CLASS</span>) <span class="keyword">VALUES</span> (<span class="number">103</span> ,<span class="string">'陆君'</span> </span><br><span class="line">,<span class="string">'男'</span> ,<span class="number">1974</span><span class="number">-06</span><span class="number">-03</span>,<span class="number">95031</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> COURSE(CNO,CNAME,TNO)<span class="keyword">VALUES</span> (<span class="string">'3-105'</span> ,<span class="string">'计算机导论'</span>,<span class="number">825</span>)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> COURSE(CNO,CNAME,TNO)<span class="keyword">VALUES</span> (<span class="string">'3-245'</span> ,<span class="string">'操作系统'</span> ,<span class="number">804</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> COURSE(CNO,CNAME,TNO)<span class="keyword">VALUES</span> (<span class="string">'6-166'</span> ,<span class="string">'数据电路'</span> ,<span class="number">856</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> COURSE(CNO,CNAME,TNO)<span class="keyword">VALUES</span> (<span class="string">'9-888'</span> ,<span class="string">'高等数学'</span> ,<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">103</span>,<span class="string">'3-245'</span>,<span class="number">86</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">105</span>,<span class="string">'3-245'</span>,<span class="number">75</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">109</span>,<span class="string">'3-245'</span>,<span class="number">68</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">103</span>,<span class="string">'3-105'</span>,<span class="number">92</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">105</span>,<span class="string">'3-105'</span>,<span class="number">88</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">109</span>,<span class="string">'3-105'</span>,<span class="number">76</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">101</span>,<span class="string">'3-105'</span>,<span class="number">64</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">107</span>,<span class="string">'3-105'</span>,<span class="number">91</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">108</span>,<span class="string">'3-105'</span>,<span class="number">78</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">101</span>,<span class="string">'6-166'</span>,<span class="number">85</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">107</span>,<span class="string">'6-106'</span>,<span class="number">79</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> SCORE(SNO,CNO,DEGREE)<span class="keyword">VALUES</span> (<span class="number">108</span>,<span class="string">'6-166'</span>,<span class="number">81</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TEACHER(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART) </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">804</span>,<span class="string">'李诚'</span>,<span class="string">'男'</span>,<span class="string">'1958-12-02'</span>,<span class="string">'副教授'</span>,<span class="string">'计算机系'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TEACHER(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART) </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">856</span>,<span class="string">'张旭'</span>,<span class="string">'男'</span>,<span class="string">'1969-03-12'</span>,<span class="string">'讲师'</span>,<span class="string">'电子工程系'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TEACHER(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">825</span>,<span class="string">'王萍'</span>,<span class="string">'女'</span>,<span class="string">'1972-05-05'</span>,<span class="string">'助教'</span>,<span class="string">'计算机系'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> TEACHER(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART) </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">831</span>,<span class="string">'刘冰'</span>,<span class="string">'女'</span>,<span class="string">'1977-08-14'</span>,<span class="string">'助教'</span>,<span class="string">'电子工程系'</span>);</span><br></pre></td></tr></table></figure>
+<h3><span id="题目">题目</span></h3><ol>
+<li>查询Student表中的所有记录的Sname、Ssex和Class列。  </li>
+<li>查询教师所有的单位即不重复的Depart列。  </li>
+<li>查询Student表的所有记录。</li>
+<li>查询Score表中成绩在60到80之间的所有记录。</li>
+<li>查询Score表中成绩为85，86或88的记录。</li>
+<li>查询Student表中“95031”班或性别为“女”的同学记录。</li>
+<li>以Class降序查询Student表的所有记录。</li>
+<li>以Cno升序、Degree降序查询Score表的所有记录。</li>
+<li>查询“95031”班的学生人数。</li>
+<li>查询Score表中的最高分的学生学号和课程号。</li>
+<li>查询‘3-105’号课程的平均分。</li>
+<li>查询Score表中至少有5名学生选修的并以3开头的课程的平均分数。</li>
+<li>查询最低分大于70，最高分小于90的Sno列。</li>
+<li>查询所有学生的Sname、Cno和Degree列。</li>
+<li>查询所有学生的Sno、Cname和Degree列。</li>
+<li>查询所有学生的Sname、Cname和Degree列。</li>
+<li>查询“95033”班所选课程的平均分。</li>
+<li>假设使用如下命令建立了一个grade表,现查询所有同学的Sno、Cno和rank列。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> grade(<span class="keyword">low</span>   <span class="built_in">number</span>(<span class="number">3</span>,<span class="number">0</span>),upp   <span class="built_in">number</span>(<span class="number">3</span>),<span class="keyword">rank</span>   <span class="built_in">char</span>(<span class="number">1</span>));</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> grade <span class="keyword">values</span>(<span class="number">90</span>,<span class="number">100</span>,’A’);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> grade <span class="keyword">values</span>(<span class="number">80</span>,<span class="number">89</span>,’B’);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> grade <span class="keyword">values</span>(<span class="number">70</span>,<span class="number">79</span>,’C’);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> grade <span class="keyword">values</span>(<span class="number">60</span>,<span class="number">69</span>,’D’);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> grade <span class="keyword">values</span>(<span class="number">0</span>,<span class="number">59</span>,’E’);</span><br></pre></td></tr></table></figure>
+<ol start="19">
+<li>查询选修“3-105”课程的成绩高于“109”号同学成绩的所有同学的记录。</li>
+<li>查询score中选学一门以上课程的同学中分数为非最高分成绩的记录。</li>
+<li>查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录。</li>
+<li>查询和学号为108的同学同年出生的所有学生的Sno、Sname和Sbirthday列。</li>
+<li>查询“张旭“教师任课的学生成绩。</li>
+<li>查询选修某课程的同学人数多于5人的教师姓名。</li>
+<li>查询95033班和95031班全体学生的记录。</li>
+<li>查询存在有85分以上成绩的课程Cno.</li>
+<li>查询出“计算机系“教师所教课程的成绩表。</li>
+<li>查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。</li>
+<li>查询选修编号为“3-105“课程且成绩至少高于一门选修编号为“3-245”课程成绩的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。</li>
+<li>查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree.</li>
+<li>查询所有教师和同学的name、sex和birthday.</li>
+<li>查询所有“女”教师和“女”同学的name、sex和birthday.<br>[]33、查询成绩比该课程平均成绩低的同学的成绩表。<br>[]34、查询所有任课教师的Tname和Depart.<br>[]35  查询所有未讲课的教师的Tname和Depart.<br>[]36、查询至少有2名男生的班号。<br>[]37、查询Student表中不姓“王”的同学记录。<br>[]38、查询Student表中每个学生的姓名和年龄。<br>[]39、查询Student表中最大和最小的Sbirthday日期值。<br>[]40、以班号和年龄从大到小的顺序查询Student表中的全部记录。<br>[]41、查询“男”教师及其所上的课程。<br>[]42、查询最高分同学的Sno、Cno和Degree列。<br>[]43、查询和“李军”同性别的所有同学的Sname.<br>[]44、查询和“李军”同性别并同班的同学Sname.<br>[]45、查询所有选修“计算机导论”课程的“男”同学的成绩表</li>
+</ol>
+<h2><span id="sql_practice遇到的问题">sql_practice遇到的问题</span></h2><h3><span id="mysql启动">mysql启动</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> mysql=/usr/<span class="built_in">local</span>/mysql/bin/mysql</span><br><span class="line"><span class="built_in">alias</span> mysqladmin=/usr/<span class="built_in">local</span>/mysql/bin/mysqladmin</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h3><span id="编码问题">编码问题</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Incorrect string value: '\xE6\x9B\xBE\xE5\x8D\x8E'</span><br></pre></td></tr></table></figure>
+<p><strong>解决方法：</strong>  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">convert</span> <span class="keyword">to</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8</span><br></pre></td></tr></table></figure>
+<h3><span id="datetime时间格式问题">datetime时间格式问题</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1292 (22007): Incorrect datetime value: '1987' for column 'sbirthday' at row 1</span><br></pre></td></tr></table></figure>
+<p><strong>解决方法：</strong>  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into student (sno,sname,ssex,sbirthday,class) values (108,'曾华','男',1997-09-01,95033);</span><br><span class="line">替换为</span><br><span class="line">mysql&gt; insert into student (sno,sname,ssex,sbirthday,class) values (108,'曾华','男',19970901,95033);</span><br></pre></td></tr></table></figure>
+<h3><span id="修改表的列">修改表的列</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> teacher <span class="keyword">modify</span> tbirthday <span class="built_in">date</span> <span class="keyword">not</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h2><span id="参考答案">参考答案</span></h2><h3><span id="1">1</span></h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sname, ssex, class from student;</span><br></pre></td></tr></table></figure>
+<h3><span id="2">2</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from teacher;</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-----------+-----------------+</span></span><br><span class="line">| tno | tname  | tsex | tbirthday  | prof      | depart          |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-----------+-----------------+</span></span><br><span class="line">| 804 | 李诚   | 男   | 1958-12-02 | 副教授    | 计算机系        |</span><br><span class="line">| 856 | 张旭   | 男   | 1969-03-12 | 讲师      | 电子工程系      |</span><br><span class="line">| 825 | 王萍   | 女   | 1972-05-05 | 助教      | 计算机系        |</span><br><span class="line">| 831 | 刘冰   | 女   | 1977-08-14 | 助教      | 电子工程系      |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-----------+-----------------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> depart <span class="keyword">from</span> teacher;</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">| depart          |</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">| 计算机系        |</span><br><span class="line">| 电子工程系      |</span><br><span class="line">| 计算机系        |</span><br><span class="line">| 电子工程系      |</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> <span class="keyword">distinct</span> depart <span class="keyword">from</span> teacher;</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">| depart          |</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">| 计算机系        |</span><br><span class="line">| 电子工程系      |</span><br><span class="line">+<span class="comment">-----------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="4">4</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select degree where between 60 and 80 from score;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; <span class="keyword">check</span> the <span class="keyword">manual</span> that corresponds <span class="keyword">to</span> your MySQL <span class="keyword">server</span> <span class="keyword">version</span> <span class="keyword">for</span> the <span class="keyword">right</span> syntax <span class="keyword">to</span> <span class="keyword">use</span> near <span class="string">'where between 60 and 80 from score'</span> <span class="keyword">at</span> line <span class="number">1</span></span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> score</span><br><span class="line">    -&gt; <span class="keyword">where</span> degree <span class="keyword">between</span> <span class="number">60</span> <span class="keyword">and</span> <span class="number">80</span>;</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 105 | 3-245 |   75.0 |</span><br><span class="line">| 109 | 3-245 |   68.0 |</span><br><span class="line">| 109 | 3-105 |   76.0 |</span><br><span class="line">| 101 | 3-105 |   64.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 107 | 6-106 |   79.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="5">5</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score</span><br><span class="line">    -&gt; where degree = 85 or degree=86 or degree=88;</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-245 |   86.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 101 | 6-166 |   85.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">where</span> degree <span class="keyword">in</span> (<span class="number">85</span>,<span class="number">86</span>,<span class="number">88</span>);</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-245 |   86.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 101 | 6-166 |   85.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="6">6</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from student</span><br><span class="line">    -&gt; where class=95031 or ssex='女';</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">| sno | sname  | ssex | sbirthday  | class |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">| 105 | 匡明   | 男   | 1975-10-02 | 95031 |</span><br><span class="line">| 107 | 王丽   | 女   | 1976-01-23 | 95033 |</span><br><span class="line">| 109 | 王芳   | 女   | 1975-02-10 | 95031 |</span><br><span class="line">| 103 | 陆君   | 男   | 1974-06-03 | 95031 |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="7">7</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from student order by class desc;</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">| sno | sname  | ssex | sbirthday  | class |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">| 108 | 曾华   | 男   | 1997-09-01 | 95033 |</span><br><span class="line">| 107 | 王丽   | 女   | 1976-01-23 | 95033 |</span><br><span class="line">| 101 | 李军   | 男   | 1976-02-20 | 95033 |</span><br><span class="line">| 105 | 匡明   | 男   | 1975-10-02 | 95031 |</span><br><span class="line">| 109 | 王芳   | 女   | 1975-02-10 | 95031 |</span><br><span class="line">| 103 | 陆君   | 男   | 1974-06-03 | 95031 |</span><br><span class="line">+<span class="comment">-----+--------+------+------------+-------+</span></span><br><span class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="8">8</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score</span><br><span class="line">    -&gt; order by cno and degree desc;</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-245 |   86.0 |</span><br><span class="line">| 105 | 3-245 |   75.0 |</span><br><span class="line">| 109 | 3-245 |   68.0 |</span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 109 | 3-105 |   76.0 |</span><br><span class="line">| 101 | 3-105 |   64.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 101 | 6-166 |   85.0 |</span><br><span class="line">| 107 | 6-106 |   79.0 |</span><br><span class="line">| 108 | 6-166 |   81.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">12 rows in <span class="keyword">set</span>, <span class="number">12</span> <span class="keyword">warnings</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> score <span class="keyword">order</span> <span class="keyword">by</span> cno <span class="keyword">asc</span>, degree <span class="keyword">desc</span>;</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 109 | 3-105 |   76.0 |</span><br><span class="line">| 101 | 3-105 |   64.0 |</span><br><span class="line">| 103 | 3-245 |   86.0 |</span><br><span class="line">| 105 | 3-245 |   75.0 |</span><br><span class="line">| 109 | 3-245 |   68.0 |</span><br><span class="line">| 107 | 6-106 |   79.0 |</span><br><span class="line">| 101 | 6-166 |   85.0 |</span><br><span class="line">| 108 | 6-166 |   81.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">12 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="9">9</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(*) from student where class='95031';</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| count(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|        3 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="10">10</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sno,cno from score</span><br><span class="line">    -&gt; where degree =</span><br><span class="line">    -&gt; (select max(degree) from score);</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">| sno | cno   |</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">| 103 | 3-105 |</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> sno,cno <span class="keyword">from</span> score</span><br><span class="line">    -&gt; <span class="keyword">order</span> <span class="keyword">by</span> degree <span class="keyword">desc</span></span><br><span class="line">    -&gt; <span class="keyword">limit</span> <span class="number">1</span>;</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">| sno | cno   |</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">| 103 | 3-105 |</span><br><span class="line">+<span class="comment">-----+-------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="11">11</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sum(degree)/count(*) from score</span><br><span class="line">    -&gt; where cno = '3-105';</span><br><span class="line"></span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">| sum(degree)/count(*) |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">|             81.50000 |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> <span class="keyword">avg</span>(degree) <span class="keyword">from</span> score <span class="keyword">where</span> cno = <span class="string">'3-105'</span>;</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">| avg(degree) |</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">|    81.50000 |</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="12-like-having">12 like having</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select avg(degree) from score</span><br><span class="line">    -&gt; where cno like '3%'</span><br><span class="line">    -&gt; group by cno</span><br><span class="line">    -&gt; having count(sno) &gt;= 5;</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">| avg(degree) |</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">|    81.50000 |</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="13-group-by-having">13 group by having</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sno from score</span><br><span class="line">    -&gt; group by sno</span><br><span class="line">    -&gt; having min(degree) &gt; 70 and max(degree) &lt; 90;</span><br><span class="line">+<span class="comment">-----+</span></span><br><span class="line">| sno |</span><br><span class="line">+<span class="comment">-----+</span></span><br><span class="line">| 105 |</span><br><span class="line">| 108 |</span><br><span class="line">+<span class="comment">-----+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="14-join-on">14 join on</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a.sname, b.cno, b.degree</span><br><span class="line">    -&gt; from</span><br><span class="line">    -&gt; student as a</span><br><span class="line">    -&gt; join</span><br><span class="line">    -&gt; score as b</span><br><span class="line">    -&gt; on a.sno = b.sno</span><br><span class="line">    -&gt; order by sname;</span><br><span class="line">+<span class="comment">--------+-------+--------+</span></span><br><span class="line">| sname  | cno   | degree |</span><br><span class="line">+<span class="comment">--------+-------+--------+</span></span><br><span class="line">| 匡明   | 3-245 |   75.0 |</span><br><span class="line">| 匡明   | 3-105 |   88.0 |</span><br><span class="line">| 曾华   | 3-105 |   78.0 |</span><br><span class="line">| 曾华   | 6-166 |   81.0 |</span><br><span class="line">| 李军   | 6-166 |   85.0 |</span><br><span class="line">| 李军   | 3-245 |   77.0 |</span><br><span class="line">| 李军   | 3-105 |   64.0 |</span><br><span class="line">| 王丽   | 3-105 |   91.0 |</span><br><span class="line">| 王丽   | 6-106 |   79.0 |</span><br><span class="line">| 王芳   | 3-245 |   68.0 |</span><br><span class="line">| 王芳   | 3-105 |   76.0 |</span><br><span class="line">| 陆君   | 3-245 |   86.0 |</span><br><span class="line">| 陆君   | 3-105 |   92.0 |</span><br><span class="line">+<span class="comment">--------+-------+--------+</span></span><br><span class="line">13 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="15">15</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sc.sno, sc.degree, co.cname</span><br><span class="line">    -&gt; from</span><br><span class="line">    -&gt; score as sc</span><br><span class="line">    -&gt; join</span><br><span class="line">    -&gt; course as co</span><br><span class="line">    -&gt; on sc.cno = co.cno;</span><br><span class="line">+<span class="comment">-----+--------+-----------------+</span></span><br><span class="line">| sno | degree | cname           |</span><br><span class="line">+<span class="comment">-----+--------+-----------------+</span></span><br><span class="line">| 103 |   86.0 | 操作系统        |</span><br><span class="line">| 105 |   75.0 | 操作系统        |</span><br><span class="line">| 109 |   68.0 | 操作系统        |</span><br><span class="line">| 103 |   92.0 | 计算机导论      |</span><br><span class="line">| 105 |   88.0 | 计算机导论      |</span><br><span class="line">| 109 |   76.0 | 计算机导论      |</span><br><span class="line">| 101 |   64.0 | 计算机导论      |</span><br><span class="line">| 107 |   91.0 | 计算机导论      |</span><br><span class="line">| 108 |   78.0 | 计算机导论      |</span><br><span class="line">| 101 |   85.0 | 数字电路        |</span><br><span class="line">| 108 |   81.0 | 数字电路        |</span><br><span class="line">| 101 |   77.0 | 操作系统        |</span><br><span class="line">+<span class="comment">-----+--------+-----------------+</span></span><br><span class="line">12 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="16">16</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select stu.sname, co.cname, sc.degree</span><br><span class="line">    -&gt; from</span><br><span class="line">    -&gt; student stu</span><br><span class="line">    -&gt; join (course co, score sc)</span><br><span class="line">    -&gt; on stu.sno = sc.sno and sc.cno = co.cno;</span><br><span class="line"></span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">| sname  | cname           | degree |</span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">| 陆君   | 操作系统          |   86.0 |</span><br><span class="line">| 匡明   | 操作系统          |   75.0 |</span><br><span class="line">| 王芳   | 操作系统          |   68.0 |</span><br><span class="line">| 陆君   | 计算机导论        |   92.0 |</span><br><span class="line">| 匡明   | 计算机导论        |   88.0 |</span><br><span class="line">| 王芳   | 计算机导论        |   76.0 |</span><br><span class="line">| 李军   | 计算机导论        |   64.0 |</span><br><span class="line">| 王丽   | 计算机导论        |   91.0 |</span><br><span class="line">| 曾华   | 计算机导论        |   78.0 |</span><br><span class="line">| 李军   | 数字电路          |   85.0 |</span><br><span class="line">| 曾华   | 数字电路          |   81.0 |</span><br><span class="line">| 李军   | 操作系统          |   77.0 |</span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">12 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="17">17</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//先看一下95033班的分数情况</span><br><span class="line">mysql&gt; select stu.sname, co.cname, sc.degree</span><br><span class="line">    -&gt; from</span><br><span class="line">    -&gt; student stu</span><br><span class="line">    -&gt; join</span><br><span class="line">    -&gt; (score sc, course co)</span><br><span class="line">    -&gt; on stu.sno=sc.sno and co.cno=sc.cno</span><br><span class="line">    -&gt; where stu.class = '95033'</span><br><span class="line">    -&gt; order by co.cname;</span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">| sname  | cname           | degree |</span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">| 李军   | 操作系统        |   77.0 |</span><br><span class="line">| 曾华   | 数字电路        |   81.0 |</span><br><span class="line">| 李军   | 数字电路        |   85.0 |</span><br><span class="line">| 李军   | 计算机导论      |   64.0 |</span><br><span class="line">| 王丽   | 计算机导论      |   91.0 |</span><br><span class="line">| 曾华   | 计算机导论      |   78.0 |</span><br><span class="line">+<span class="comment">--------+-----------------+--------+</span></span><br><span class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">//再统计<span class="number">95033</span>班上各门课的平均分</span><br><span class="line">mysql&gt; <span class="keyword">select</span> co.cname, <span class="keyword">avg</span>(sc.degree)</span><br><span class="line">    -&gt; <span class="keyword">from</span></span><br><span class="line">    -&gt; student stu</span><br><span class="line">    -&gt; <span class="keyword">join</span> (score sc, course co)</span><br><span class="line">    -&gt; <span class="keyword">on</span> stu.sno=sc.sno <span class="keyword">and</span> co.cno=sc.cno</span><br><span class="line">    -&gt; <span class="keyword">where</span> stu.class = <span class="string">'95033'</span></span><br><span class="line">    -&gt; <span class="keyword">group</span> <span class="keyword">by</span> cname;</span><br><span class="line">+<span class="comment">-----------------+----------------+</span></span><br><span class="line">| cname           | avg(sc.degree) |</span><br><span class="line">+<span class="comment">-----------------+----------------+</span></span><br><span class="line">| 操作系统         |       77.00000 |</span><br><span class="line">| 数字电路         |       83.00000 |</span><br><span class="line">| 计算机导论       |       77.66667 |</span><br><span class="line">+<span class="comment">-----------------+----------------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="18">18</span></h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into grade values(90,100,'A');</span><br><span class="line">mysql&gt; insert into grade values(80,89,'B');</span><br><span class="line">mysql&gt; insert into grade values(70,79,'C');</span><br><span class="line">mysql&gt; insert into grade values(60,69,'D');</span><br><span class="line">mysql&gt; insert into grade values(0,59,'E');</span><br></pre></td></tr></table></figure>
+<h3><span id="19">19</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a.* from score a</span><br><span class="line">    -&gt; where a.cno = '3-105' and a.degree &gt;</span><br><span class="line">    -&gt; all(</span><br><span class="line">    -&gt; select degree from score b</span><br><span class="line">    -&gt; where b.sno = '109' and b.cno = '3-105');</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="20">20</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score s</span><br><span class="line">    -&gt; where degree &lt; (select max(degree) from score)</span><br><span class="line">    -&gt; group by sno</span><br><span class="line">    -&gt; having count(sno) &gt; 1</span><br><span class="line">    -&gt; order by degree;</span><br><span class="line">ERROR 1055 (42000): Expression <span class="comment">#2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sql_practice.s.cno' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/23921117/disable-only-full-group-by" target="_blank" rel="noopener">[解决方法]</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));</span><br><span class="line">mysql&gt; select @@sql_mode;</span><br><span class="line">+<span class="comment">------------------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line">| @@sql_mode                                                                                                             |</span><br><span class="line">+<span class="comment">------------------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line">| STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |</span><br><span class="line">+<span class="comment">------------------------------------------------------------------------------------------------------------------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score s </span><br><span class="line">	 -&gt; where degree &lt; (select max(degree) from score) </span><br><span class="line">	 -&gt; group by sno </span><br><span class="line">	 -&gt; having count(sno) &gt; 1 </span><br><span class="line">	 -&gt; order by degree;</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 101 | 3-105 |   64.0 |</span><br><span class="line">| 109 | 3-245 |   68.0 |</span><br><span class="line">| 105 | 3-245 |   75.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="21">21</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score</span><br><span class="line">    -&gt; where degree &gt; (select degree from score where sno='109' and cno='3-105');</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-245 |   86.0 |</span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 101 | 6-166 |   85.0 |</span><br><span class="line">| 107 | 6-106 |   79.0 |</span><br><span class="line">| 108 | 6-166 |   81.0 |</span><br><span class="line">| 101 | 3-245 |   77.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">9 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="22">22</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sno, sname, sbirthday from student</span><br><span class="line">    -&gt; where year(sbirthday) = (</span><br><span class="line">    -&gt; select year(sbirthday) from student</span><br><span class="line">    -&gt; where sno = '108');</span><br><span class="line">+<span class="comment">-----+--------+------------+</span></span><br><span class="line">| sno | sname  | sbirthday  |</span><br><span class="line">+<span class="comment">-----+--------+------------+</span></span><br><span class="line">| 108 | 曾华   | 1997-09-01 |</span><br><span class="line">+<span class="comment">-----+--------+------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="23">23</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sno, degree from score sc</span><br><span class="line">    -&gt; join</span><br><span class="line">    -&gt; (course co, teacher te)</span><br><span class="line">    -&gt; on co.tno = te.tno and sc.cno = co.cno</span><br><span class="line">    -&gt; where te.tname = '张旭';</span><br><span class="line">+<span class="comment">-----+--------+</span></span><br><span class="line">| sno | degree |</span><br><span class="line">+<span class="comment">-----+--------+</span></span><br><span class="line">| 101 |   85.0 |</span><br><span class="line">| 108 |   81.0 |</span><br><span class="line">+<span class="comment">-----+--------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="24">24</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select te.tname from teacher te</span><br><span class="line">    -&gt; join (score sc, course co)</span><br><span class="line">    -&gt; on te.tno = co.tno and sc.cno = co.cno</span><br><span class="line">    -&gt; group by co.cno</span><br><span class="line">    -&gt; having cout(co.cno) &gt; 5;</span><br><span class="line">+<span class="comment">--------+</span></span><br><span class="line">| tname  |</span><br><span class="line">+<span class="comment">--------+</span></span><br><span class="line">| 王萍    |</span><br><span class="line">+<span class="comment">--------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="25">25</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score sc</span><br><span class="line">    -&gt; join student st on sc.sno = st.sno</span><br><span class="line">    -&gt; where stu.class = '95033' or stu.class = '95031';</span><br><span class="line">+<span class="comment">-----+-------+--------+-----+--------+------+------------+-------+</span></span><br><span class="line">| sno | cno   | degree | sno | sname  | ssex | sbirthday  | class |</span><br><span class="line">+<span class="comment">-----+-------+--------+-----+--------+------+------------+-------+</span></span><br><span class="line">| 103 | 3-245 |   86.0 | 103 | 陆君   | 男   | 1974-06-03 | 95031 |</span><br><span class="line">| 105 | 3-245 |   75.0 | 105 | 匡明   | 男   | 1975-10-02 | 95031 |</span><br><span class="line">| 109 | 3-245 |   68.0 | 109 | 王芳   | 女   | 1975-02-10 | 95031 |</span><br><span class="line">| 103 | 3-105 |   92.0 | 103 | 陆君   | 男   | 1974-06-03 | 95031 |</span><br><span class="line">| 105 | 3-105 |   88.0 | 105 | 匡明   | 男   | 1975-10-02 | 95031 |</span><br><span class="line">| 109 | 3-105 |   76.0 | 109 | 王芳   | 女   | 1975-02-10 | 95031 |</span><br><span class="line">| 101 | 3-105 |   64.0 | 101 | 李军   | 男   | 1976-02-20 | 95033 |</span><br><span class="line">| 107 | 3-105 |   91.0 | 107 | 王丽   | 女   | 1976-01-23 | 95033 |</span><br><span class="line">| 108 | 3-105 |   78.0 | 108 | 曾华   | 男   | 1997-09-01 | 95033 |</span><br><span class="line">| 101 | 6-166 |   85.0 | 101 | 李军   | 男   | 1976-02-20 | 95033 |</span><br><span class="line">| 107 | 6-106 |   79.0 | 107 | 王丽   | 女   | 1976-01-23 | 95033 |</span><br><span class="line">| 108 | 6-166 |   81.0 | 108 | 曾华   | 男   | 1997-09-01 | 95033 |</span><br><span class="line">| 101 | 3-245 |   77.0 | 101 | 李军   | 男   | 1976-02-20 | 95033 |</span><br><span class="line">+<span class="comment">-----+-------+--------+-----+--------+------+------------+-------+</span></span><br><span class="line">13 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="26">26</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select cno from score</span><br><span class="line">    -&gt; group by cno</span><br><span class="line">    -&gt; having max(degree) &gt; 85;</span><br><span class="line">+<span class="comment">-------+</span></span><br><span class="line">| cno   |</span><br><span class="line">+<span class="comment">-------+</span></span><br><span class="line">| 3-105 |</span><br><span class="line">| 3-245 |</span><br><span class="line">+<span class="comment">-------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="27">27</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sc.sno, co.cname, sc.degree, te.tname from</span><br><span class="line">    -&gt; score sc join (course co, teacher te)</span><br><span class="line">    -&gt; on sc.cno = co.cno and te.tno = co.tno</span><br><span class="line">    -&gt; where te.depart = '计算机系';</span><br><span class="line">+<span class="comment">-----+-----------------+--------+--------+</span></span><br><span class="line">| sno | cname           | degree | tname  |</span><br><span class="line">+<span class="comment">-----+-----------------+--------+--------+</span></span><br><span class="line">| 103 | 操作系统        |   86.0 | 李诚   |</span><br><span class="line">| 105 | 操作系统        |   75.0 | 李诚   |</span><br><span class="line">| 109 | 操作系统        |   68.0 | 李诚   |</span><br><span class="line">| 103 | 计算机导论      |   92.0 | 王萍   |</span><br><span class="line">| 105 | 计算机导论      |   88.0 | 王萍   |</span><br><span class="line">| 109 | 计算机导论      |   76.0 | 王萍   |</span><br><span class="line">| 101 | 计算机导论      |   64.0 | 王萍   |</span><br><span class="line">| 107 | 计算机导论      |   91.0 | 王萍   |</span><br><span class="line">| 108 | 计算机导论      |   78.0 | 王萍   |</span><br><span class="line">| 101 | 操作系统        |   77.0 | 李诚   |</span><br><span class="line">+<span class="comment">-----+-----------------+--------+--------+</span></span><br><span class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="28">28</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select tname, prof from teacher</span><br><span class="line">    -&gt; where depart = '计算机系' and prof not in (</span><br><span class="line">    -&gt; select prof from teacher</span><br><span class="line">    -&gt; where depart = '电子工程系');</span><br><span class="line">+<span class="comment">--------+-----------+</span></span><br><span class="line">| tname  | prof      |</span><br><span class="line">+<span class="comment">--------+-----------+</span></span><br><span class="line">| 李诚    | 副教授     |</span><br><span class="line">+<span class="comment">--------+-----------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="29-any">29 any ?</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score </span><br><span class="line">	 -&gt; where degree &gt; any(</span><br><span class="line">	 -&gt; 	select degree from score </span><br><span class="line">	 -&gt; 	where cno = '3-245') </span><br><span class="line">	 -&gt; and cno = '3-105' </span><br><span class="line">	 -&gt; order by degree</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">| 108 | 3-105 |   78.0 |</span><br><span class="line">| 109 | 3-105 |   76.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="30-all">30 all ?</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from score </span><br><span class="line">	 -&gt; where degree &gt; all(</span><br><span class="line">	 -&gt; 	select degree from score </span><br><span class="line">	 -&gt; 	where cno = '3-245') </span><br><span class="line">	 -&gt; and cno = '3-105' </span><br><span class="line">	 -&gt; order by degree</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| sno | cno   | degree |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">| 103 | 3-105 |   92.0 |</span><br><span class="line">| 107 | 3-105 |   91.0 |</span><br><span class="line">| 105 | 3-105 |   88.0 |</span><br><span class="line">+<span class="comment">-----+-------+--------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h3><span id="面试统计订单问题">面试统计订单问题</span></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建表 */</span></span><br><span class="line">mysql&gt; CREATE TABLE success_killed(</span><br><span class="line">  `seckill_id` BIGINT NOT NULL <span class="keyword">COMMENT</span> <span class="string">'秒杀商品ID'</span>,</span><br><span class="line">  <span class="string">`user_phone`</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户手机号'</span>,</span><br><span class="line">  <span class="string">`state`</span> <span class="built_in">TINYINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">-1</span> <span class="keyword">COMMENT</span> <span class="string">'状态标识:-1:无效 0:成功 1:已付款 2:已发货'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(seckill_id,user_phone),<span class="comment">/*联合主键*/</span></span><br><span class="line">  <span class="keyword">KEY</span> idx_create_time(create_time)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'秒杀成功明细表'</span></span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> success_killed <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">date_format</span>(create_time, <span class="string">'%Y-%m'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 或者 */</span></span><br><span class="line">mysql&gt; select count(*) from success_killed group by year(create_time), month(create_time);</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| count(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|        4 |</span><br><span class="line">|        4 |</span><br><span class="line">|        2 |</span><br><span class="line">|        5 |</span><br><span class="line">|        4 |</span><br><span class="line">|        4 |</span><br><span class="line">|        4 |</span><br><span class="line">|        2 |</span><br><span class="line">|        5 |</span><br><span class="line">|        9 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate here.</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Deep WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Deep Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql/" rel="tag"># sql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/macDown语法/" rel="next" title="macDown语法中文文档">
+                <i class="fa fa-chevron-left"></i> macDown语法中文文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/25/QQZoneLogin/" rel="prev" title="Mac + Python2.7 + iTerm 实现自动登录QQ空间">
+                Mac + Python2.7 + iTerm 实现自动登录QQ空间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/头像.jpg" alt="Deep">
+            
+              <p class="site-author-name" itemprop="name">Deep</p>
+              <p class="site-description motion-element" itemprop="description">丧向人格, 慢热选手</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NjustJiaweihan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:njustjiaweihan@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/ba-ye-21" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5106309307" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xyzghio.xyz" title="Aaron Zhu" target="_blank">Aaron Zhu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">sql_practice遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">mysql启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">datetime时间格式问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">修改表的列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">参考答案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.7.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.8.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.9.</span> <span class="nav-text">10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.10.</span> <span class="nav-text">11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.11.</span> <span class="nav-text">12 like having</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.12.</span> <span class="nav-text">13 group by having</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.13.</span> <span class="nav-text">14 join on</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.14.</span> <span class="nav-text">15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.15.</span> <span class="nav-text">16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.16.</span> <span class="nav-text">17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.17.</span> <span class="nav-text">18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.18.</span> <span class="nav-text">19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.19.</span> <span class="nav-text">20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.20.</span> <span class="nav-text">21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.21.</span> <span class="nav-text">22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.22.</span> <span class="nav-text">23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.23.</span> <span class="nav-text">24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.24.</span> <span class="nav-text">25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.25.</span> <span class="nav-text">26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.26.</span> <span class="nav-text">27</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.27.</span> <span class="nav-text">28</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.28.</span> <span class="nav-text">29 any ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.29.</span> <span class="nav-text">30 all ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.30.</span> <span class="nav-text">面试统计订单问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">8.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("an5K6gmGlTjR0h1NfD9qUPTE-gzGzoHsz", "Vmx2FnJBOkazj24axAihzsiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
