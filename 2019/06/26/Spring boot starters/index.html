@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring boot,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实习公司老大哥想要做个spring-boot-starter的培训，让我给先打个样儿，于是搜集了一些资料，还很浅显，以后慢慢补充，现在写一个完整的文档记录一下。">
+<meta name="keywords" content="spring boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring boot starters总结(慢慢充实)">
+<meta property="og:url" content="http://yoursite.com/2019/06/26/Spring boot starters/index.html">
+<meta property="og:site_name" content="Deep&#39;s HomePage">
+<meta property="og:description" content="实习公司老大哥想要做个spring-boot-starter的培训，让我给先打个样儿，于是搜集了一些资料，还很浅显，以后慢慢补充，现在写一个完整的文档记录一下。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-26T10:15:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring boot starters总结(慢慢充实)">
+<meta name="twitter:description" content="实习公司老大哥想要做个spring-boot-starter的培训，让我给先打个样儿，于是搜集了一些资料，还很浅显，以后慢慢补充，现在写一个完整的文档记录一下。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/26/Spring boot starters/">
+
+
+
+
+
+  <title>Spring boot starters总结(慢慢充实) | Deep's HomePage</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Deep's HomePage</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/Spring boot starters/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deep">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Deep's HomePage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring boot starters总结(慢慢充实)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T18:06:37+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-全家桶/" itemprop="url" rel="index">
+                    <span itemprop="name">spring 全家桶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/26/Spring boot starters/" class="leancloud_visitors" data-flag-title="Spring boot starters总结(慢慢充实)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实习公司老大哥想要做个spring-boot-starter的培训，让我给先打个样儿，于是搜集了一些资料，还很浅显，以后慢慢补充，现在写一个完整的文档记录一下。</p>
+<a id="more"></a>
+<p><a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-starters" target="_blank" rel="noopener">[github源码地址]</a> | <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter" target="_blank" rel="noopener">[官方英文文档]</a> | <a href="https://github.com/DocsHome/springboot/blob/master/SUMMARY.md" target="_blank" rel="noopener">[个翻中文文档]</a></p>
+<p>Starters are a set of convenient dependency descriptors which we can include in our application.</p>
+<p>Spring Boot provides built-in starters which makes development easier and rapid. For example, if we want to get started using Spring and JPA for database access, just include the spring-boot-starter-data-jpa dependency in your project.</p>
+<p>Starter should follow a naming pattern like: spring-boot-starter-<em>, where </em> is a particular type of application. This naming structure is intended to help when you need to find a starter.</p>
+<h3><span id="spring-boot-starter">spring-boot-starter</span></h3><pre><code>Core starter, including auto-configuration support, logging and YAML
+Core starter,包括 自动配置支持、 logging and YAML
+logging是指的Starter的专有框架；YAML是“另一种标记语言”的外语缩写，它参考了其他多种语言，包括：XML、C语言、Python、Perl以及电子邮件格式RFC2822
+</code></pre><h3><span id="spring-boot-starter-activemq">spring-boot-starter-activemq</span></h3><pre><code>Starter for JMS messaging using Apache ActiveMQ
+为JMS使用Apache ActiveMQ    ActiveMQ 是Apache出品，最流行的，能力强劲的开源消息总线
+</code></pre><h3><span id="spring-boot-starter-amqp">spring-boot-starter-amqp</span></h3><pre><code>Starter for using Spring AMQP and Rabbit MQ
+Spring AMQP 是基于 Spring 框架的 AMQP 消息解决方案,提供模板化的发送和接收消息的抽象层,提供基于消息驱动的 POJO；RabbitMQ是一个在AMQP基础上完整的，可复用的企业消息系统
+</code></pre><h3><span id="spring-boot-starter-aop">spring-boot-starter-aop</span></h3><pre><code>Starter for aspect-oriented programming with Spring AOP and AspectJ
+通过Spring AOP、AspectJ面向切面编程    
+AspectJ是一个面向切面的框架，它扩展了Java语言
+</code></pre><h3><span id="spring-boot-starter-artemis">spring-boot-starter-artemis</span></h3><pre><code>Starter for JMS messaging using Apache Artemis
+为JMS messaging使用Apache Artemis
+JMS是Java消息服务；HornetQ代码库捐献给 Apache ActiveMQ 社区，它现在成为ActiveMQ旗下的一个子项目，名为 “Artemis”
+</code></pre><h3><span id="spring-boot-starter-batch">spring-boot-starter-batch</span></h3><pre><code>Starter for using Spring Batch
+Spring Batch是一个轻量级的,完全面向Spring的批处理框架,可以应用于企业级大量的数据处理系统
+</code></pre><h3><span id="spring-boot-starter-cache">spring-boot-starter-cache</span></h3><pre><code>Starter for using Spring Framework’s caching support
+Spring caching是Spring的提供的缓存框架
+</code></pre><h3><span id="spring-boot-starter-cloud-connectors">spring-boot-starter-cloud-connectors</span></h3><pre><code>Starter for using Spring Cloud Connectors which simplifies connecting to services in cloud platforms like Cloud Foundry and Heroku
+Cloud Foundry是VMware推出的业界第一个开源PaaS云平台；Heroku是一个支持多种编程语言的云平台即服务
+</code></pre><h3><span id="spring-boot-starter-data-cassandra">spring-boot-starter-data-cassandra</span></h3><pre><code>Starter for using Cassandra distributed database and Spring Data Cassandra
+Apache Cassandra是一套开源分布式NoSQL数据库系统
+</code></pre><h3><span id="spring-boot-starter-data-cassandra-reactive">spring-boot-starter-data-cassandra-reactive</span></h3><pre><code>Starter for using Cassandra distributed database and Spring Data Cassandra Reactive
+</code></pre><h3><span id="spring-boot-starter-data-couchbase">spring-boot-starter-data-couchbase</span></h3><pre><code>Starter for using Couchbase document-oriented database and Spring Data Couchbase
+使用Couchbase 文件存储数据库、Spring Data Couchbase
+Spring Data是一个用于简化数据库访问，并支持云服务的开源框架
+</code></pre><h3><span id="spring-boot-starter-data-couchbase-reactive">spring-boot-starter-data-couchbase-reactive</span></h3><pre><code>Starter for using Couchbase document-oriented database and Spring Data Couchbase Reactive
+</code></pre><h3><span id="spring-boot-starter-data-elasticsearch">spring-boot-starter-data-elasticsearch</span></h3><pre><code>Starter for using Elasticsearch search and analytics engine and Spring Data Elasticsearch
+ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口
+</code></pre><h3><span id="spring-boot-starter-data-jdbc">spring-boot-starter-data-jdbc</span></h3><pre><code>Starter for using Spring Data JDBC
+</code></pre><h3><span id="spring-boot-starter-data-jpa">spring-boot-starter-data-jpa</span></h3><pre><code>Starter for using Spring Data JPA with Hibernate
+JPA全称Java Persistence API.JPA通过JDK 5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中
+</code></pre><h3><span id="spring-boot-starter-data-ldap">spring-boot-starter-data-ldap</span></h3><pre><code>Starter for using Spring Data LDAP
+</code></pre><h3><span id="spring-boot-starter-data-mongodb">spring-boot-starter-data-mongodb</span></h3><pre><code>Starter for using MongoDB document-oriented database and Spring Data MongoDB
+Spring Data是一个用于简化数据库访问，并支持云服务的开源框架
+</code></pre><h3><span id="spring-boot-starter-data-mongodb-reactive">spring-boot-starter-data-mongodb-reactive</span></h3><pre><code>Starter for using MongoDB document-oriented database and Spring Data MongoDB Reactive
+</code></pre><h3><span id="spring-boot-starter-data-neo4j">spring-boot-starter-data-neo4j</span></h3><pre><code>Starter for using Neo4j graph database and Spring Data Neo4j
+Neo4j是一个高性能的,NOSQL图形数据库，它将结构化数据存储在网络上而不是表中
+</code></pre><h3><span id="spring-boot-starter-data-redis">spring-boot-starter-data-redis</span></h3><pre><code>Starter for using Redis key-value data store with Spring Data Redis and the Lettuce client
+通过Spring Data Redis 、Jedis client使用Redis键值存储数据库    Jedis 是 Redis 官方首选的 Java 客户端开发包
+</code></pre><h3><span id="spring-boot-starter-data-redis-reactive">spring-boot-starter-data-redis-reactive</span></h3><pre><code>Starter for using Redis key-value data store with Spring Data Redis reactive and the Lettuce client
+</code></pre><h3><span id="spring-boot-starter-data-rest">spring-boot-starter-data-rest</span></h3><pre><code>Starter for exposing Spring Data repositories over REST using Spring Data REST
+使用Spring Data REST 以 REST 方式暴露 Spring Data repositories
+</code></pre><h3><span id="spring-boot-starter-data-solr">spring-boot-starter-data-solr</span></h3><pre><code>Starter for using the Apache Solr search platform with Spring Data Solr
+Apache Solr 是一个开源的搜索服务器。Solr 使用 Java 语言开发，主要基于 HTTP 和 Apache Lucene 实现
+</code></pre><h3><span id="spring-boot-starter-freemarker">spring-boot-starter-freemarker</span></h3><pre><code>Starter for building MVC web applications using FreeMarker views
+FreeMarker是模视图模板，同类事物：Jsp
+</code></pre><h3><span id="spring-boot-starter-groovy-templates">spring-boot-starter-groovy-templates</span></h3><pre><code>Starter for building MVC web applications using Groovy Templates views
+Groovy Templates是模视图模板，同类事物：Jsp
+</code></pre><h3><span id="spring-boot-starter-hateoas">spring-boot-starter-hateoas</span></h3><pre><code>Starter for building hypermedia-based RESTful web application with Spring MVC and Spring HATEOAS
+Spring HATEOAS 是一个用于支持实现超文本驱动的 REST Web 服务的开发库
+</code></pre><h3><span id="spring-boot-starter-integration">spring-boot-starter-integration</span></h3><pre><code>Starter for using Spring Integration
+Spring Integration是Spring框架创建的一个API，面向企业应用集成(EAI)
+</code></pre><h3><span id="spring-boot-starter-jdbc">spring-boot-starter-jdbc</span></h3><pre><code>Starter for using JDBC with the HikariCP connection pool
+通过 Tomcat JDBC 连接池使用JDBC
+</code></pre><h3><span id="spring-boot-starter-jersey">spring-boot-starter-jersey</span></h3><pre><code>Starter for building RESTful web applications using JAX-RS and Jersey. An alternative to spring-boot-starter-web
+通过 JAX-RS、Jersey构建 RESTful web applications；spring-boot-starter-web的另一替代方案    
+JAX-RS是JAVA EE6 引入的一个新技术；Jersey不仅仅是一个JAX-RS的参考实现，Jersey提供自己的API，其API继承自JAX-RS，提供更多的特性和功能以进一步简化RESTful service和客户端的开发
+</code></pre><h3><span id="spring-boot-starter-jooq">spring-boot-starter-jooq</span></h3><pre><code>Starter for using jOOQ to access SQL databases. An alternative to spring-boot-starter-data-jpa or spring-boot-starter-jdbc
+jOOQ（Java Object Oriented Querying，即面向Java对象查询）是一个高效地合并了复杂SQL、类型安全、源码生成、ActiveRecord、存储过程以及高级数据类型的Java API的类库。
+</code></pre><h3><span id="spring-boot-starter-json">spring-boot-starter-json</span></h3><pre><code>Starter for reading and writing json
+</code></pre><h3><span id="spring-boot-starter-jta-atomikos">spring-boot-starter-jta-atomikos</span></h3><pre><code>Starter for JTA transactions using Atomikos
+JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理；Atomikos 是一个为Java平台提供增值服务的并且开源类事务管理
+</code></pre><h3><span id="spring-boot-starter-jta-bitronix">spring-boot-starter-jta-bitronix</span></h3><pre><code>Starter for JTA transactions using Bitronix
+Bitronix Transaction Manager (BTM) 是一个简单但完整实现了 JTA 1.1 API 的类库，完全支持 XA 事务管理器，提供 JTA API 所需的所有服务，并让代码保持简洁
+</code></pre><h3><span id="spring-boot-starter-mail">spring-boot-starter-mail</span></h3><pre><code>Starter for using Java Mail and Spring Framework’s email sending support
+Java Mail、Spring email为邮件发送工具
+</code></pre><h3><span id="spring-boot-starter-mustache">spring-boot-starter-mustache</span></h3><pre><code>Starter for building web applications using Mustache views
+Mustache是基于JavaScript实现的模版引擎，类似于jQuery Template，但是这个模版更加的轻量级，语法更加的简单易用，很容易上手
+</code></pre><h3><span id="spring-boot-starter-oauth2-client">spring-boot-starter-oauth2-client</span></h3><pre><code>Starter for using Spring Security’s OAuth2/OpenID Connect client features
+</code></pre><h3><span id="spring-boot-starter-oauth2-resource-server">spring-boot-starter-oauth2-resource-server</span></h3><pre><code>Starter for using Spring Security’s OAuth2 resource server features
+</code></pre><h3><span id="spring-boot-starter-quartz">spring-boot-starter-quartz</span></h3><pre><code>Starter for using the Quartz scheduler
+</code></pre><h3><span id="spring-boot-starter-security">spring-boot-starter-security</span></h3><pre><code>Starter for using Spring Security
+Spring Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架
+</code></pre><h3><span id="spring-boot-starter-test">spring-boot-starter-test</span></h3><pre><code>Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito
+测试 Spring Boot applications包含JUnit、 Hamcrest、Mockito测试框架
+</code></pre><h3><span id="spring-boot-starter-thymeleaf">spring-boot-starter-thymeleaf</span></h3><pre><code>Starter for building MVC web applications using Thymeleaf views
+使MVC Web applications 支持Thymeleaf
+Thymeleaf是一个JAVA库，一个XML/XHTML/HTML5的可扩展的模板引擎，同类事物：Jsp
+</code></pre><h3><span id="spring-boot-starter-validation">spring-boot-starter-validation</span></h3><pre><code>Starter for using Java Bean Validation with Hibernate Validator
+Bean Validation 是一个数据验证的规范；Hibernate Validator是一个数据验证框架
+</code></pre><h3><span id="spring-boot-starter-web">spring-boot-starter-web</span></h3><pre><code>Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container
+构建Web，包含RESTful风格框架SpringMVC和默认的嵌入式容器Tomcat    RESTful是一种软件架构风格，设计风格而不是标准，只是提供了一组设计原则和约束条件
+</code></pre><h3><span id="spring-boot-starter-web-services">spring-boot-starter-web-services</span></h3><pre><code>Starter for using Spring Web Services
+使用Spring Web Services
+Spring Web Services是基于Spring框架的Web服务框架，主要侧重于基于文档驱动的Web服务，提供SOAP服务开发，允许通过多种方式创建 Web 服务。
+</code></pre><h3><span id="spring-boot-starter-webflux">spring-boot-starter-webflux</span></h3><pre><code>Starter for building WebFlux applications using Spring Framework’s Reactive Web support
+</code></pre><h3><span id="spring-boot-starter-websocket">spring-boot-starter-websocket</span></h3><pre><code>Starter for building WebSocket applications using Spring Framework’s WebSocket support
+相对于HTTP这种非持久的协议来说,Websocket是一个持久化的协议
+</code></pre><h2><span id="spring-boot-production-starters">Spring Boot production starters</span></h2><h3><span id="spring-boot-starter-actuator">spring-boot-starter-actuator</span></h3><pre><code>Starter for using Spring Boot’s Actuator which provides production ready features to help you monitor and manage your application
+使用Spring Boot Actuator 的 production-ready 功能来帮助你监视和管理应用
+</code></pre><h2><span id="spring-boot-technical-starters">Spring Boot technical starters</span></h2><h3><span id="spring-boot-starter-jetty">spring-boot-starter-jetty</span></h3><pre><code>Starter for using Jetty as the embedded servlet container. An alternative to spring-boot-starter-tomcat
+使用 Jetty 作为嵌入式服务容器；spring-boot-starter-tomcat的另一替代方案 Jetty 是开源 Java 应用服务器
+</code></pre><h3><span id="spring-boot-starter-log4j2">spring-boot-starter-log4j2</span></h3><pre><code>Starter for using Log4j2 for logging. An alternative to spring-boot-starter-logging
+</code></pre><h3><span id="spring-boot-starter-logging">spring-boot-starter-logging</span></h3><pre><code>Starter for logging using Logback. Default logging starter
+Logback是由log4j创始人设计的又一个开源日志组件
+</code></pre><h3><span id="spring-boot-starter-reactor-netty">spring-boot-starter-reactor-netty</span></h3><pre><code>Starter for using Reactor Netty as the embedded reactive HTTP server.
+</code></pre><h3><span id="spring-boot-starter-tomcat">spring-boot-starter-tomcat</span></h3><pre><code>Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by spring-boot-starter-web
+</code></pre><h3><span id="spring-boot-starter-undertow">spring-boot-starter-undertow</span></h3><pre><code>Starter for using Undertow as the embedded servlet container. An alternative to spring-boot-starter-tomcat
+使用 Undertow 作为嵌入式服务容器；spring-boot-starter-tomcat的另一替代方案    
+Undertow是JBoss开源组织旗下一款Web服务器的名称
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate here.</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Deep WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Deep Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/25/QQZoneLogin/" rel="next" title="Mac + Python2.7 + iTerm 实现自动登录QQ空间">
+                <i class="fa fa-chevron-left"></i> Mac + Python2.7 + iTerm 实现自动登录QQ空间
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/entityCodeCreate/" rel="prev" title="Spring boot + freemarker 实现代码生成器">
+                Spring boot + freemarker 实现代码生成器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/头像.jpg" alt="Deep">
+            
+              <p class="site-author-name" itemprop="name">Deep</p>
+              <p class="site-description motion-element" itemprop="description">丧向人格, 慢热选手</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NjustJiaweihan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:njustjiaweihan@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/ba-ye-21" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5106309307" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xyzghio.xyz" title="Aaron Zhu" target="_blank">Aaron Zhu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">spring-boot-starter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">spring-boot-starter-activemq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">spring-boot-starter-amqp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">spring-boot-starter-aop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">spring-boot-starter-artemis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">spring-boot-starter-batch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">spring-boot-starter-cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">spring-boot-starter-cloud-connectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">spring-boot-starter-data-cassandra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">spring-boot-starter-data-cassandra-reactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">spring-boot-starter-data-couchbase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">spring-boot-starter-data-couchbase-reactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">13.</span> <span class="nav-text">spring-boot-starter-data-elasticsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">14.</span> <span class="nav-text">spring-boot-starter-data-jdbc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">15.</span> <span class="nav-text">spring-boot-starter-data-jpa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">16.</span> <span class="nav-text">spring-boot-starter-data-ldap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">17.</span> <span class="nav-text">spring-boot-starter-data-mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">18.</span> <span class="nav-text">spring-boot-starter-data-mongodb-reactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">19.</span> <span class="nav-text">spring-boot-starter-data-neo4j</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">20.</span> <span class="nav-text">spring-boot-starter-data-redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">21.</span> <span class="nav-text">spring-boot-starter-data-redis-reactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">22.</span> <span class="nav-text">spring-boot-starter-data-rest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">23.</span> <span class="nav-text">spring-boot-starter-data-solr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">24.</span> <span class="nav-text">spring-boot-starter-freemarker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">25.</span> <span class="nav-text">spring-boot-starter-groovy-templates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">26.</span> <span class="nav-text">spring-boot-starter-hateoas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">27.</span> <span class="nav-text">spring-boot-starter-integration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">28.</span> <span class="nav-text">spring-boot-starter-jdbc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">29.</span> <span class="nav-text">spring-boot-starter-jersey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">30.</span> <span class="nav-text">spring-boot-starter-jooq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">31.</span> <span class="nav-text">spring-boot-starter-json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">32.</span> <span class="nav-text">spring-boot-starter-jta-atomikos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">33.</span> <span class="nav-text">spring-boot-starter-jta-bitronix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">34.</span> <span class="nav-text">spring-boot-starter-mail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">35.</span> <span class="nav-text">spring-boot-starter-mustache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">36.</span> <span class="nav-text">spring-boot-starter-oauth2-client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">37.</span> <span class="nav-text">spring-boot-starter-oauth2-resource-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">38.</span> <span class="nav-text">spring-boot-starter-quartz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">39.</span> <span class="nav-text">spring-boot-starter-security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">40.</span> <span class="nav-text">spring-boot-starter-test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">41.</span> <span class="nav-text">spring-boot-starter-thymeleaf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">42.</span> <span class="nav-text">spring-boot-starter-validation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">43.</span> <span class="nav-text">spring-boot-starter-web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">44.</span> <span class="nav-text">spring-boot-starter-web-services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">45.</span> <span class="nav-text">spring-boot-starter-webflux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">46.</span> <span class="nav-text">spring-boot-starter-websocket</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Spring Boot production starters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">spring-boot-starter-actuator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Spring Boot technical starters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">spring-boot-starter-jetty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">spring-boot-starter-log4j2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">spring-boot-starter-logging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">spring-boot-starter-reactor-netty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">spring-boot-starter-tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">spring-boot-starter-undertow</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">16.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("an5K6gmGlTjR0h1NfD9qUPTE-gzGzoHsz", "Vmx2FnJBOkazj24axAihzsiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
