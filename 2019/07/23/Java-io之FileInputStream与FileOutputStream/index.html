@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="HashMap,">
+  <meta name="keywords" content="FileInputStream,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近面试经常被问到Collection framework相关的问题，所以打算系统的复习一下。">
-<meta name="keywords" content="HashMap">
+<meta name="description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
+<meta name="keywords" content="FileInputStream">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap(JDK 1.8)">
-<meta property="og:url" content="http://yoursite.com/2019/07/09/HashMap/index.html">
+<meta property="og:title" content="Java.io之FileInputStream与FileOutputStream">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/Java-io之FileInputStream与FileOutputStream/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
-<meta property="og:description" content="最近面试经常被问到Collection framework相关的问题，所以打算系统的复习一下。">
+<meta property="og:description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-09T09:35:58.000Z">
+<meta property="og:updated_time" content="2019-07-23T10:18:22.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HashMap(JDK 1.8)">
-<meta name="twitter:description" content="最近面试经常被问到Collection framework相关的问题，所以打算系统的复习一下。">
+<meta name="twitter:title" content="Java.io之FileInputStream与FileOutputStream">
+<meta name="twitter:description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/09/HashMap/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/Java-io之FileInputStream与FileOutputStream/">
 
 
 
 
 
-  <title>HashMap(JDK 1.8) | Deep's HomePage</title>
+  <title>Java.io之FileInputStream与FileOutputStream | Deep's HomePage</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/HashMap/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/Java-io之FileInputStream与FileOutputStream/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Deep">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HashMap(JDK 1.8)</h1>
+          <h1 class="post-title" itemprop="name headline">Java.io之FileInputStream与FileOutputStream</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-09T15:58:51+08:00">
-                2019-07-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-23T16:34:15+08:00">
+                2019-07-23
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JDK-1-8-源码阅读/" itemprop="url" rel="index">
-                    <span itemprop="name">JDK 1.8 源码阅读</span>
+                  <a href="/categories/Java-io/" itemprop="url" rel="index">
+                    <span itemprop="name">Java.io</span>
                   </a>
                 </span>
 
@@ -332,7 +332,7 @@
 
           
           
-             <span id="/2019/07/09/HashMap/" class="leancloud_visitors" data-flag-title="HashMap(JDK 1.8)">
+             <span id="/2019/07/23/Java-io之FileInputStream与FileOutputStream/" class="leancloud_visitors" data-flag-title="Java.io之FileInputStream与FileOutputStream">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  448
+                  771
                 </span>
               
 
@@ -382,13 +382,25 @@
       
 
       
-        <p>最近面试经常被问到Collection framework相关的问题，所以打算系统的复习一下。</p>
-<a id="more"></a>
-<h2><span id="hashmap">HashMap</span></h2><p>permits<tt>null</tt> values and the <tt>null</tt> key</p>
-<p>(The <tt>HashMap</tt>class is roughly equivalent to <tt>Hashtable</tt>, except that it is unsynchronized and permits nulls.)</p>
-<p> Iteration over collection views requires time proportional to the “capacity” of the <tt>HashMap</tt> instance (the number of buckets) plus its size (the number of key-value mappings).</p>
-<h3><span id="hashmap的成员">HashMap的成员</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The default initial capacity - MUST be a power of two.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The maximum capacity, used if a higher value is implicitly specified</span></span><br><span class="line"><span class="comment"> * by either of the constructors with arguments.</span></span><br><span class="line"><span class="comment"> * MUST be a power of two &lt;= 1&lt;&lt;30.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The load factor used when none specified in constructor.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The bin count threshold for using a tree rather than list for a</span></span><br><span class="line"><span class="comment"> * bin.  Bins are converted to trees when adding an element to a</span></span><br><span class="line"><span class="comment"> * bin with at least this many nodes. The value must be greater</span></span><br><span class="line"><span class="comment"> * than 2 and should be at least 8 to mesh with assumptions in</span></span><br><span class="line"><span class="comment"> * tree removal about conversion back to plain bins upon</span></span><br><span class="line"><span class="comment"> * shrinkage.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The bin count threshold for untreeifying a (split) bin during a</span></span><br><span class="line"><span class="comment"> * resize operation. Should be less than TREEIFY_THRESHOLD, and at</span></span><br><span class="line"><span class="comment"> * most 6 to mesh with shrinkage detection under removal.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The smallest table capacity for which bins may be treeified.</span></span><br><span class="line"><span class="comment"> * (Otherwise the table is resized if too many nodes in a bin.)</span></span><br><span class="line"><span class="comment"> * Should be at least 4 * TREEIFY_THRESHOLD to avoid conflicts</span></span><br><span class="line"><span class="comment"> * between resizing and treeification thresholds.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</span><br></pre></td></tr></table></figure>
-<h3><span id="node">Node</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">final</span> K key;</span><br><span class="line">    V value;</span><br><span class="line">    Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">    Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.hash = hash;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span>        </span>&#123; <span class="keyword">return</span> key; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span>      </span>&#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> key + <span class="string">"="</span> + value; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123;</span><br><span class="line">        V oldValue = value;</span><br><span class="line">        value = newValue;</span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">this</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            <span class="keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2><span id="fileinputstream与fileoutputstream设计目的">FileInputStream与FileOutputStream设计目的</span></h2><p>通过File或者FileDescriptor对文件对象进行输入输出数据。</p>
+<h2><span id="fileinputstream与fileoutputstream使用方法">FileInputStream与FileOutputStream使用方法</span></h2><h2><span id="fileoutputstream源码解析">FileOutputStream源码解析</span></h2><h3><span id="字段">字段</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件描述符</span></span><br><span class="line"><span class="comment">//详情见&lt;讨论-FileDescriptor&gt;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FileDescriptor fd;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否进行内容扩充--true表示保留原文件中内容基础上扩充数据; false则覆盖原数据</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> append;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FileChannel是一个连接到文件的通道。可以通过文件通道读写文件。</span></span><br><span class="line"><span class="comment">//FileChannel无法设置为非阻塞模式，它总是运行在阻塞模式下</span></span><br><span class="line"><span class="keyword">private</span> FileChannel channel;</span><br><span class="line"></span><br><span class="line"><span class="comment">//等同于File.getPath--文件路径字符串</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String path;</span><br></pre></td></tr></table></figure>
+<h3><span id="主要方法">主要方法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将byte数组内容写入文件输出流</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将byte[off]到byte[off+length]写入文件输出流</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将字节b写入文件输出流</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> b)</span></span></span><br></pre></td></tr></table></figure>
+<h2><span id="fileinputstream源码解析">FileInputStream源码解析</span></h2><h3><span id="字段">字段</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//比FileOutputStream少了append</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FileDescriptor fd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> FileChannel channel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String path;</span><br></pre></td></tr></table></figure>
+<h3><span id="主要方法">主要方法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//都是比较常规的IO方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从文件输入流中读取一个字节并返回</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//从文件输入流中读取b.length个字节到b中</span></span></span><br><span class="line"><span class="function"><span class="comment">//@return 实际读取的字节数</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">skip</span><span class="params">(<span class="keyword">long</span> n)</span></span></span><br></pre></td></tr></table></figure>
+<h2><span id="讨论">讨论</span></h2><h3><span id="filedescriptor">FileDescriptor</span></h3><p><strong>维基百科：</strong>是一个用于表述指向文件的引用的抽象化概念。在形式上是一个非负整数。<span style="color: red">实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。</span>当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<p>内核为每个进程都会维护一个Map结构的File Table，其中key = fd; value = metadate(文件物理地址/读写权限等信息)。在Java中，打开文件或者socket之后内核返回一个fd，然后你可以拿着fd去操作文件或者socket，也可以把这个fd做为参数传来传去。你不能把文件或者socket“本身”作为一个参数传给一个函数吧，传fd就可以，可以利用fd做打开，关闭，读，写等等操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.deepblog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileDescriptor;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOSourceCode6</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileOutputStream out = <span class="keyword">new</span> FileOutputStream(FileDescriptor.out);</span><br><span class="line">            out.write(<span class="string">"hello"</span>.getBytes());</span><br><span class="line">            </span><br><span class="line">            out.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="append">append</span></h3><p>append表示是否进行文件内容扩充：</p>
+<ul>
+<li>true表示保留原文件中内容基础上扩充数据;</li>
+<li>false则覆盖原数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.deepblog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileDescriptor;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOSourceCode6</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String FilePath = <span class="string">"/Users/deep/Desktop/file.txt"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileOutputStream fout = <span class="keyword">new</span> FileOutputStream(FilePath, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            fout.write(<span class="string">"\nappend date"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line"></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">原文件内容：</span><br><span class="line">abcdef</span><br><span class="line">现在文件内容：</span><br><span class="line">abcdef</span><br><span class="line">append date</span><br></pre></td></tr></table></figure>
+<h2><span id="参考阅读">参考阅读</span></h2><ul>
+<li><a href>FileDescriptor相关阅读</a></li>
+<li><a href="http://ifeve.com/file-channel/" target="_blank" rel="noopener">FileChannel相关阅读</a></li>
+</ul>
+
       
     </div>
     
@@ -434,7 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+            <a href="/tags/FileInputStream/" rel="tag"># FileInputStream</a>
           
         </div>
       
@@ -447,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/09/HashTable/" rel="next" title="HashTable(JDK 1.8)">
-                <i class="fa fa-chevron-left"></i> HashTable(JDK 1.8)
+              <a href="/2019/07/23/Java-io之BufferedInputStream与BufferedOutputStream/" rel="next" title="Java.io之BufferedInputStream与BufferedOutputStream">
+                <i class="fa fa-chevron-left"></i> Java.io之BufferedInputStream与BufferedOutputStream
               </a>
             
           </div>
@@ -456,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/23/Java-io之BufferedInputStream与BufferedOutputStream/" rel="prev" title="Java.io之BufferedInputStream与BufferedOutputStream">
-                Java.io之BufferedInputStream与BufferedOutputStream <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">HashMap的成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Node</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">FileInputStream与FileOutputStream设计目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">FileInputStream与FileOutputStream使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">FileOutputStream源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">FileInputStream源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">FileDescriptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">append</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">参考阅读</span></a></li></ol></div>
             
 
           </div>
