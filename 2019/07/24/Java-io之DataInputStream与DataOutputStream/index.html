@@ -81,14 +81,14 @@
 
 <meta name="description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java-io之DataInputStream与DataOutputStream">
+<meta property="og:title" content="Java-io之DataInputStream">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/Java-io之DataInputStream与DataOutputStream/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
 <meta property="og:description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T06:20:11.352Z">
+<meta property="og:updated_time" content="2019-07-25T06:34:00.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java-io之DataInputStream与DataOutputStream">
+<meta name="twitter:title" content="Java-io之DataInputStream">
 <meta name="twitter:description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Java-io之DataInputStream与DataOutputStream | Deep's HomePage</title>
+  <title>Java-io之DataInputStream | Deep's HomePage</title>
   
 
 
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java-io之DataInputStream与DataOutputStream</h1>
+          <h1 class="post-title" itemprop="name headline">Java-io之DataInputStream</h1>
         
 
         <div class="post-meta">
@@ -309,7 +309,7 @@
 
           
           
-             <span id="/2019/07/24/Java-io之DataInputStream与DataOutputStream/" class="leancloud_visitors" data-flag-title="Java-io之DataInputStream与DataOutputStream">
+             <span id="/2019/07/24/Java-io之DataInputStream与DataOutputStream/" class="leancloud_visitors" data-flag-title="Java-io之DataInputStream">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -444,9 +444,72 @@
 <h4><span id="第6步将字符数组转换成string字符串并返回">第6步，将字符数组转换成String字符串，并返回</span></h4><p>return new String(chararr, 0, chararr_count);</p>
 <h4><span id="关于utf-8与modified-utf-8">关于UTF-8与Modified UTF-8</span></h4><p>细心的老哥肯定发现了readUTF()源码将”1111 xxxx”四字节字符作为非法字符抛异常了。</p>
 <p><a href="https://docs.oracle.com/javase/8/docs/api/java/io/DataInput.html#modified-utf-8" target="_blank" rel="noopener">oracle官网-Modified UTF-8 (MUTF-8)：</a></p>
-<p><table><br>     <tbody><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_a">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_a">Byte 1</th><br>       <td><center>0</center><br>       </td><td colspan="7"><center>bits 6-0</center><br>     </td></tr><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_b">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_b">Byte 1</th><br>       <td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="5"><center>bits 10-6</center><br>     </td></tr><br>     <tr><br>       <th id="byte2_a">Byte 2</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 5-0</center><br>     </td></tr><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_c">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_c">Byte 1</th><br>       <td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="4"><center>bits 15-12</center><br>     </td></tr><br>     <tr><br>       <th id="byte2_b">Byte 2</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 11-6</center><br>     </td></tr><br>     <tr><br>       <th id="byte3">Byte 3</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 5-0</center><br>     </td></tr><br>   </tbody><br></table><br>其实readUTF()针对的编码是Modified UTF-8而不是UTF-8, 所以”1111 xxxx”四字节字符也是非法字符。</p>
+<table>
+<thead>
+<tr>
+<th>单字节</th>
+<th>Bit Values</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Byte 1</td>
+<td>0</td>
+<td>bits 6 - 0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>双字节</th>
+<th>Bit Values</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Byte 1</td>
+<td>110</td>
+<td>bits 10 - 6</td>
+</tr>
+<tr>
+<td>Byte 2</td>
+<td>10</td>
+<td>bits 5 - 0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>三字节</th>
+<th>Bit Values</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Byte 1</td>
+<td>1110</td>
+<td>bits 15-12</td>
+</tr>
+<tr>
+<td>Byte 2</td>
+<td>10</td>
+<td>bits 11-6</td>
+</tr>
+<tr>
+<td>Byte 3</td>
+<td>10</td>
+<td>bits 5-0</td>
+</tr>
+</tbody>
+</table>
+<p>其实readUTF()针对的编码是Modified UTF-8而不是UTF-8, 所以”1111 xxxx”四字节字符也是非法字符。</p>
 <h3><span id="参考阅读">参考阅读</span></h3><ul>
-<li><a href="https://www.cnblogs.com/skywang12345/p/io_14.html" target="_blank" rel="noopener">java io系列14之 DataInputStream(数据输入流)的认知、源码和示例 (本篇博客对原文部分内容进行了更正)</a></li>
+<li><a href="https://www.cnblogs.com/skywang12345/p/io_14.html" target="_blank" rel="noopener">java io系列14之DataInputStream(数据输入流)的认知、源码和示例 (本篇博客对原文部分内容进行了更正)</a></li>
 </ul>
 
       
