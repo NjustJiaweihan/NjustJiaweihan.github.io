@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-io之DataInputStream与DataOutputStream">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/Java-io之DataInputStream与DataOutputStream/index.html">
+<meta property="og:site_name" content="Deep&#39;s HomePage">
+<meta property="og:description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-25T05:53:22.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java-io之DataInputStream与DataOutputStream">
+<meta name="twitter:description" content="DataInputStream 是数据输入流。它继承于FilterInputStream。DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/Java-io之DataInputStream与DataOutputStream/">
+
+
+
+
+
+  <title>Java-io之DataInputStream与DataOutputStream | Deep's HomePage</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Deep's HomePage</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/Java-io之DataInputStream与DataOutputStream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deep">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Deep's HomePage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java-io之DataInputStream与DataOutputStream</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-24T17:32:07+08:00">
+                2019-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/24/Java-io之DataInputStream与DataOutputStream/" class="leancloud_visitors" data-flag-title="Java-io之DataInputStream与DataOutputStream">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>DataInputStream 是数据输入流。它继承于FilterInputStream。<br>DataInputStream 是用来装饰其它输入流，它“允许应用程序以与机器无关方式从底层输入流中读取基本 Java 数据类型”。应用程序可以使用DataOutputStream(数据输出流)写入由DataInputStream(数据输入流)读取的数据。</p>
+<a id="more"></a>
+<p>DataInputStream源码的难点主要就是两个方法</p>
+<ul>
+<li>阻塞读readfully()</li>
+<li>阻塞跳过skipBytes()</li>
+<li>基于Modified UTF-8规范的字符串读取readUTF()</li>
+</ul>
+<h3><span id="非阻塞读read与阻塞读readfully">非阻塞读read()与阻塞读readfully()</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//该方法是非阻塞方法</span></span><br><span class="line"><span class="comment">//read(byte[])以及read(byte[], int, int)都是尝试读取length个字节</span></span><br><span class="line"><span class="comment">//如果流中字节数不够 也立马返回 最终读取字节数 &lt;= length</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[])</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> in.read(b, <span class="number">0</span>, b.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//该方法是阻塞方法</span></span><br><span class="line"><span class="comment">//读不到len个字符则一直循环读取</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">readFully</span><span class="params">(<span class="keyword">byte</span> b[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException();</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n &lt; len) &#123;</span><br><span class="line">        <span class="keyword">int</span> count = in.read(b, off + n, len - n);</span><br><span class="line">        <span class="keyword">if</span> (count &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> EOFException();</span><br><span class="line">        n += count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="阻塞跳过skipbytes">阻塞跳过skipBytes()</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//https://codeday.me/bug/20181231/480189.html</span></span><br><span class="line"><span class="comment">//该方法是阻塞方法</span></span><br><span class="line"><span class="comment">//在“达到文件/数据末尾”这种情况之外 skipBytes依旧可能出现跳过的字节数小于n的情况</span></span><br><span class="line"><span class="comment">//网络IO存在延迟 数据没有全部进入流 可能在发送方缓冲区中 </span></span><br><span class="line"><span class="comment">//while循环会一直执行 直到total达到n的要求或者in.skip()失败</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">skipBytes</span><span class="params">(<span class="keyword">int</span> n)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//调用skipBytes以来 总共可以跳过的字节数</span></span><br><span class="line">    <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//当前尝试in.skip所可以跳过的字节数</span></span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//当total没满足n要求 或者 in.skip失败前 都阻塞</span></span><br><span class="line">    <span class="keyword">while</span> ((total&lt;n) &amp;&amp; ((cur = (<span class="keyword">int</span>) in.skip(n-total)) &gt; <span class="number">0</span>)) &#123;</span><br><span class="line">        total += cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="readutf中的modified-utf-8字符串读取">readUTF()中的Modified UTF-8字符串读取</span></h3><p>接下来我们再来看readUTF()源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String <span class="title">readUTF</span><span class="params">(DataInput in)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	<span class="comment">// 注意：UTF-8输入流的前2个字节是数据的长度</span></span><br><span class="line">    <span class="keyword">int</span> utflen = in.readUnsignedShort();</span><br><span class="line">    <span class="keyword">byte</span>[] bytearr = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">char</span>[] chararr = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//如果in是数据流 字节数组与字符数组就用in的</span></span><br><span class="line">    <span class="comment">//如果in不是数据流 new字节数组与字符数组</span></span><br><span class="line">    <span class="keyword">if</span> (in <span class="keyword">instanceof</span> DataInputStream) &#123;</span><br><span class="line">        DataInputStream dis = (DataInputStream)in;</span><br><span class="line">        <span class="keyword">if</span> (dis.bytearr.length &lt; utflen)&#123;</span><br><span class="line">            dis.bytearr = <span class="keyword">new</span> <span class="keyword">byte</span>[utflen*<span class="number">2</span>];</span><br><span class="line">            dis.chararr = <span class="keyword">new</span> <span class="keyword">char</span>[utflen*<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        chararr = dis.chararr;</span><br><span class="line">        bytearr = dis.bytearr;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        bytearr = <span class="keyword">new</span> <span class="keyword">byte</span>[utflen];</span><br><span class="line">        chararr = <span class="keyword">new</span> <span class="keyword">char</span>[utflen];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> c, char2, char3;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> chararr_count=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//以阻塞读方式读取utllen长度个字节</span></span><br><span class="line">    in.readFully(bytearr, <span class="number">0</span>, utflen);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//先将单字节字符转换完成</span></span><br><span class="line">    <span class="keyword">while</span> (count &lt; utflen) &#123;</span><br><span class="line">        c = (<span class="keyword">int</span>) bytearr[count] &amp; <span class="number">0xff</span>;</span><br><span class="line">        <span class="comment">//c &gt; 127 代表不再是单字节字符</span></span><br><span class="line">        <span class="keyword">if</span> (c &gt; <span class="number">127</span>) <span class="keyword">break</span>;</span><br><span class="line">        count++;</span><br><span class="line">        chararr[chararr_count++]=(<span class="keyword">char</span>)c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//转换多字节字符(也包括后续出现的单字节字符)</span></span><br><span class="line">    <span class="keyword">while</span> (count &lt; utflen) &#123;</span><br><span class="line">        c = (<span class="keyword">int</span>) bytearr[count] &amp; <span class="number">0xff</span>;</span><br><span class="line">        <span class="keyword">switch</span> (c &gt;&gt; <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">case</span> <span class="number">4</span>: <span class="keyword">case</span> <span class="number">5</span>: <span class="keyword">case</span> <span class="number">6</span>: <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                <span class="comment">/* 0xxxxxxx*/</span></span><br><span class="line">                <span class="comment">//对应单字节字符</span></span><br><span class="line">                count++;</span><br><span class="line">                chararr[chararr_count++]=(<span class="keyword">char</span>)c;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">12</span>: <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">                <span class="comment">/* 110x xxxx   10xx xxxx*/</span></span><br><span class="line">                <span class="comment">//对应双字节字符</span></span><br><span class="line">                count += <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span> (count &gt; utflen)</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                        <span class="string">"malformed input: partial character at end"</span>);</span><br><span class="line">                char2 = (<span class="keyword">int</span>) bytearr[count-<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ((char2 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>)</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                        <span class="string">"malformed input around byte "</span> + count);</span><br><span class="line">                chararr[chararr_count++]=(<span class="keyword">char</span>)(((c &amp; <span class="number">0x1F</span>) &lt;&lt; <span class="number">6</span>) |</span><br><span class="line">                                                (char2 &amp; <span class="number">0x3F</span>));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">14</span>:</span><br><span class="line">                <span class="comment">/* 1110 xxxx  10xx xxxx  10xx xxxx */</span></span><br><span class="line">                <span class="comment">//对应三字节字符</span></span><br><span class="line">                count += <span class="number">3</span>;</span><br><span class="line">                <span class="keyword">if</span> (count &gt; utflen)</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                        <span class="string">"malformed input: partial character at end"</span>);</span><br><span class="line">                char2 = (<span class="keyword">int</span>) bytearr[count-<span class="number">2</span>];</span><br><span class="line">                char3 = (<span class="keyword">int</span>) bytearr[count-<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (((char2 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>) || ((char3 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>))</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                        <span class="string">"malformed input around byte "</span> + (count-<span class="number">1</span>));</span><br><span class="line">                chararr[chararr_count++]=(<span class="keyword">char</span>)(((c     &amp; <span class="number">0x0F</span>) &lt;&lt; <span class="number">12</span>) |</span><br><span class="line">                                                ((char2 &amp; <span class="number">0x3F</span>) &lt;&lt; <span class="number">6</span>)  |</span><br><span class="line">                                                ((char3 &amp; <span class="number">0x3F</span>) &lt;&lt; <span class="number">0</span>));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="comment">/* 10xx xxxx,  1111 xxxx */</span></span><br><span class="line">                <span class="comment">//对应错误字符</span></span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                    <span class="string">"malformed input around byte "</span> + count);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// The number of chars produced may be less than utflen</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(chararr, <span class="number">0</span>, chararr_count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>(01) readUTF()的作用，是从输入流中读取<strong>Modified UTF-8 (MUTF-8)</strong>编码的数据，并以String字符串的形式返回。<br>(02) 知道了readUTF()的作用之后，下面开始介绍readUTF()的流程：</p>
+<h4><span id="第1步读取出输入流中的utf-8数据的长度">第1步，读取出输入流中的UTF-8数据的长度</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int utflen = in.readUnsignedShort();</span><br></pre></td></tr></table></figure>
+<p>UTF-8数据的长度包含在它的前两个字节当中；我们通过readUnsignedShort()读取出前两个字节对应的正整数就是UTF-8数据的长度。</p>
+<h4><span id="第2步创建2个数组字节数组bytearr-和-字符数组chararr">第2步，创建2个数组：字节数组bytearr 和 字符数组chararr</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (in <span class="keyword">instanceof</span> DataInputStream) &#123;</span><br><span class="line">	DataInputStream dis = (DataInputStream)in;</span><br><span class="line">	<span class="keyword">if</span> (dis.bytearr.length &lt; utflen)&#123;</span><br><span class="line">		dis.bytearr = <span class="keyword">new</span> <span class="keyword">byte</span>[utflen*<span class="number">2</span>];</span><br><span class="line">		dis.chararr = <span class="keyword">new</span> <span class="keyword">char</span>[utflen*<span class="number">2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	chararr = dis.chararr;</span><br><span class="line">	bytearr = dis.bytearr;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	bytearr = <span class="keyword">new</span> <span class="keyword">byte</span>[utflen];</span><br><span class="line">	chararr = <span class="keyword">new</span> <span class="keyword">char</span>[utflen];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先，判断该输入流本身是不是DataInputStream，即数据输入流；若是的话，<br>则，设置字节数组bytearr = “数据输入流”的成员bytearr<br>      设置字符数组chararr = “数据输入流”的成员chararr<br>否则的话，新建数组bytearr和chararr。</p>
+<h4><span id="第3步将utf-8数据全部读取到字节数组bytearr中">第3步，将UTF-8数据全部读取到“字节数组bytearr”中</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">in.readFully(bytearr, <span class="number">0</span>, utflen);</span><br></pre></td></tr></table></figure>
+<p>读取全部数据存储到字节数组中<span style="color:red">(这里博主不理解：对于超过0x7f这样的数据 如何存储进字节数组中呢?)</span></p>
+<h4><span id="第4步先对utf-8中开头的单字节数据进行转换">第4步，先对UTF-8中开头的单字节数据进行转换</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (count &lt; utflen) &#123;</span><br><span class="line">    <span class="comment">// 将每个字节转换成int值</span></span><br><span class="line">    c = (<span class="keyword">int</span>) bytearr[count] &amp; <span class="number">0xff</span>;</span><br><span class="line">    <span class="comment">// UTF-8的单字节数据的值都不会超过127；所以，超过127，则退出。</span></span><br><span class="line">    <span class="keyword">if</span> (c &gt; <span class="number">127</span>) <span class="keyword">break</span>;</span><br><span class="line">    count++;</span><br><span class="line">    <span class="comment">// 将c保存到“字符数组chararr”中</span></span><br><span class="line">    chararr[chararr_count++]=(<span class="keyword">char</span>)c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UTF-8的数据是变长的，可以是1-4个字节；在readUTF()中，我们最终是将全部的UTF-8数据保存到“字符数组(而不是字节数组)”中，再将其转换为String字符串。</p>
+<p>由于UTF-8的单字节和ASCII相同，所以这里就将它们进行预处理，直接保存到“字符数组chararr”中。对于其它的UTF-8数据，则在后面进行处理。</p>
+<p><strong>注意：</strong>这里处理的是开头的单字节字符，躲在多字节字符后面的单字节字符在下面的步骤中处理，之所以这样处理，我猜想是一般数据流中以单字节数据为主，下面统一处理步骤中的”&gt;&gt;4”操作有性能代价，于是将数据流开头的单字节先处理掉，提高readUTF()性能。</p>
+<h4><span id="第5步对第4步处理之后的数据接着进行处理">第5步，对“第4步处理”之后的数据，接着进行处理</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理完输入流中单字节的符号之后，接下来我们继续处理。</span></span><br><span class="line"><span class="comment">// 程序执行到这里 下一个要处理的字节一定是 &gt; 127的</span></span><br><span class="line"><span class="keyword">while</span> (count &lt; utflen) &#123;</span><br><span class="line">	<span class="comment">//bytearr[count]变为四字节int: 0000 0000 xxxx xxxx</span></span><br><span class="line">    c = (<span class="keyword">int</span>) bytearr[count] &amp; <span class="number">0xff</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//循环右移四位变为: 0000 0000 0000 xxxx</span></span><br><span class="line">    <span class="comment">//相当于保留下0000 0000 xxxx xxxx的第三个字节用于下面使用</span></span><br><span class="line">    <span class="comment">//至于为何将字节的第三个字节作为如何处理的判断依据呢 见下面的说明</span></span><br><span class="line">    <span class="keyword">switch</span> (c &gt;&gt; <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="comment">// 若 UTF-8 是单字节，即 bytearr[count] 对应是 “0xxxxxxx” 形式；</span></span><br><span class="line">        <span class="comment">// 则 bytearr[count] 对应的int类型的c的取值范围是 0-7。</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">case</span> <span class="number">4</span>: <span class="keyword">case</span> <span class="number">5</span>: <span class="keyword">case</span> <span class="number">6</span>: <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">            <span class="comment">/* 0xxxxxxx*/</span></span><br><span class="line">            count++;</span><br><span class="line">            chararr[chararr_count++]=(<span class="keyword">char</span>)c;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="comment">// 若 UTF-8 是双字节，即 bytearr[count] 对应是 “110xxxxx  10xxxxxx” 形式中的第一个，即“110xxxxx”</span></span><br><span class="line">        <span class="comment">// 则 bytearr[count] 对应的int类型的c的取值范围是 12-13。</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">12</span>: <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">            <span class="comment">/* 110x xxxx   10xx xxxx*/</span></span><br><span class="line">            count += <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; utflen)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                    <span class="string">"malformed input: partial character at end"</span>);</span><br><span class="line">            char2 = (<span class="keyword">int</span>) bytearr[count-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> ((char2 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                    <span class="string">"malformed input around byte "</span> + count);</span><br><span class="line">            chararr[chararr_count++]=(<span class="keyword">char</span>)(((c &amp; <span class="number">0x1F</span>) &lt;&lt; <span class="number">6</span>) |</span><br><span class="line">                                            (char2 &amp; <span class="number">0x3F</span>));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="comment">// 若 UTF-8 是三字节，即 bytearr[count] 对应是 “1110xxxx  10xxxxxx  10xxxxxx” 形式中的第一个，即“1110xxxx”</span></span><br><span class="line">        <span class="comment">// 则 bytearr[count] 对应的int类型的c的取值是14 。</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">14</span>:</span><br><span class="line">            <span class="comment">/* 1110 xxxx  10xx xxxx  10xx xxxx */</span></span><br><span class="line">            count += <span class="number">3</span>;</span><br><span class="line">            <span class="keyword">if</span> (count &gt; utflen)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                    <span class="string">"malformed input: partial character at end"</span>);</span><br><span class="line">            char2 = (<span class="keyword">int</span>) bytearr[count-<span class="number">2</span>];</span><br><span class="line">            char3 = (<span class="keyword">int</span>) bytearr[count-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span> (((char2 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>) || ((char3 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>))</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                    <span class="string">"malformed input around byte "</span> + (count-<span class="number">1</span>));</span><br><span class="line">            chararr[chararr_count++]=(<span class="keyword">char</span>)(((c     &amp; <span class="number">0x0F</span>) &lt;&lt; <span class="number">12</span>) |</span><br><span class="line">                                            ((char2 &amp; <span class="number">0x3F</span>) &lt;&lt; <span class="number">6</span>)  |</span><br><span class="line">                                            ((char3 &amp; <span class="number">0x3F</span>) &lt;&lt; <span class="number">0</span>));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 此处是非法字节的处理 </span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="comment">/* 10xx xxxx,  1111 xxxx */</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">                <span class="string">"malformed input around byte "</span> + count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(a) 我们将下面的两条语句一起进行说明</p>
+<p>c = (int) bytearr[count] &amp; 0xff;<br>switch (c &gt;&gt; 4) { … }<br>首先，我们必须要理解 为什么要这么做(执行上面2条语句)呢？<br>原因很简单，这么做的目的就是为了区分UTF-8数据是几位的；因为UTF-8的数据是1～4字节不等。</p>
+<p>至于为什么这样区分呢 我们先看一下<a href="https://baike.baidu.com/item/UTF-8/481798" target="_blank" rel="noopener">百度百科关于UTF-8的解析：</a></p>
+<table>
+<thead>
+<tr>
+<th>Unicode/UCS-4</th>
+<th>bit数</th>
+<th>UTF-8</th>
+<th>byte数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000 ~ 007F</td>
+<td>0~7</td>
+<td>0XXX XXXX</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0080 ~ 07FF</td>
+<td>8~11</td>
+<td>110X XXXX 10XX XXXX</td>
+<td>2</td>
+</tr>
+<tr>
+<td>0800 ~ FFFF</td>
+<td>12~16</td>
+<td>1110XXXX 10XX XXXX 10XX XXXX</td>
+<td>3</td>
+</tr>
+<tr>
+<td>10000 ~ 1FFFFF</td>
+<td>17~21</td>
+<td>1111 0XXX 10XX XXXX 10XX XXXX 10XX XXXX</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>如果对上面表格不理解的话 可以看一下<a href="https://www.zhihu.com/question/23374078" target="_blank" rel="noopener">UTF-8参考阅读-知乎：</a></p>
+<div class="RichContent-inner"><span class="RichText ztext CopyrightRichText-richText" itemprop="text" ecommerce="[object Object]">简单来说：<br><ul><li>Unicode 是「字符集」</li><li>UTF-8 是「编码规则」</li></ul>其中：<br><ul><li>字符集：为每一个「字符」分配一个唯一的 ID（学名为码位 / 码点 / Code Point）<br></li><li>编码规则：将「码位」转换为字节序列的规则（编码/解码 可以理解为 加密/解密 的过程）</li></ul><br><p>广义的 Unicode 是一个标准，定义了一个字符集以及一系列的编码规则，即 Unicode 字符集和 UTF-8、UTF-16、UTF-32 等等编码……</p><p>Unicode 字符集为每一个字符分配一个码位，例如「知」的码位是 30693，记作 U+77E5（30693 的十六进制为 0x77E5）。</p>UTF-8 顾名思义，是一套以 8 位为一个编码单位的可变长编码。会将一个码位编码为 1 到 4 个字节：<br><div class="highlight"><pre><code class="language-text">U+ 0000 ~ U+ 007F: 0XXXXXXX<br>U+ 0080 ~ U+ 07FF: 110XXXXX 10XXXXXX<br>U+ 0800 ~ U+ FFFF: 1110XXXX 10XXXXXX 10XXXXXX<br>U+10000 ~ U+1FFFF: 11110XXX 10XXXXXX 10XXXXXX 10XXXXXX<br></code></pre></div>根据上表中的编码规则，之前的「知」字的码位 U+77E5 属于第三行的范围：<br><div class="highlight"><pre><code class="language-text">       7    7    E    5<br>    0111 0111 1110 0101    二进制的 77E5<br>————————–<br>    0111   011111   100101 二进制的 77E5<br>1110XXXX 10XXXXXX 10XXXXXX 模版（上表第三行）<br>11100111 10011111 10100101 代入模版<br>   E   7    9   F    A   5</code></pre></div>这就是将 U+77E5 按照 UTF-8 编码为字节序列 E79FA5 的过程。反之亦然。</span></div>
+
+
+<p>现在我们知道了 原来表格第三列中的”0XXXXXXX”中的”0”, 以及“110XXXXX 10XXXXXX”中的”110”,”10”是UTF-8编码的模板壳子。</p>
+<p>那我们可以想象一个数据流的可能样子(实际”|”是不存在的)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0XXXXXXX | 0XXXXXXX | 110XXXXX 10XXXXXX | 0XXXXXXX | 1110XXXX 10XXXXXX 10XXXXXX</span><br><span class="line"> 单字节   |   单字节  |       双字节       |   单字节  |           三字节</span><br></pre></td></tr></table></figure>
+<p>我们发现每种字符(单/双/三/四字节)的头(前四位)都不一样：</p>
+<ul>
+<li>单字节 <---> 0XXX <---> 0~7</---></---></li>
+<li>双字节 <---> 110X <---> 12~13</---></---></li>
+<li>三字节 <---> 1110 <---> 14</---></---></li>
+<li>四字节 <---> 1111 <---> 15</---></---></li>
+</ul>
+<p><strong>因此我们就找到了区分字符种类的办法 <--> 字节的首四位</--></strong></p>
+<p>接下来以二字节字符说明一下相应源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="number">12</span>: <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">    <span class="comment">/* 110x xxxx   10xx xxxx*/</span></span><br><span class="line">    <span class="comment">//字节头是"110x"的代表该字符是二字节字符</span></span><br><span class="line">    <span class="comment">//于是直接读取两个字节 count += 2;</span></span><br><span class="line">    count += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (count &gt; utflen)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">            <span class="string">"malformed input: partial character at end"</span>);</span><br><span class="line">    <span class="comment">//读取的第二个字节要符合模版要求: "10xx xxxx*"</span></span><br><span class="line">    <span class="comment">//0xC0为"1100 0000" char2 &amp; 0xC0就是只保留char2高两位查看是否是0x80(1000 0000)</span></span><br><span class="line">    char2 = (<span class="keyword">int</span>) bytearr[count-<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> ((char2 &amp; <span class="number">0xC0</span>) != <span class="number">0x80</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UTFDataFormatException(</span><br><span class="line">            <span class="string">"malformed input around byte "</span> + count);</span><br><span class="line">    <span class="comment">//全部校验完毕后将其转为char</span></span><br><span class="line">    <span class="comment">//c &amp; 0x1F 是将 110x xxxx 中的"x"表示的数据取出来</span></span><br><span class="line">    <span class="comment">//char2 &amp; 0x3F是将 10xx xxxx 中的"x"表示的数据取出来</span></span><br><span class="line">    <span class="comment">//因为前面我们讲过UTF-8有个模板壳子 现在将真实的数据取出来</span></span><br><span class="line">    chararr[chararr_count++]=(<span class="keyword">char</span>)(((c &amp; <span class="number">0x1F</span>) &lt;&lt; <span class="number">6</span>) |</span><br><span class="line">                                    (char2 &amp; <span class="number">0x3F</span>));</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<h4><span id="第6步将字符数组转换成string字符串并返回">第6步，将字符数组转换成String字符串，并返回</span></h4><p>return new String(chararr, 0, chararr_count);</p>
+<h4><span id="关于utf-8与modified-utf-8">关于UTF-8与Modified UTF-8</span></h4><p>细心的老哥肯定发现了readUTF()源码将”1111 xxxx”四字节字符作为非法字符抛异常了。</p>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/io/DataInput.html#modified-utf-8" target="_blank" rel="noopener">oracle官网-Modified UTF-8 (MUTF-8)：</a></p>
+<table border="1" cellspacing="0" cellpadding="8" summary="Bit values and bytes"><br>     <tbody><tr><br>       <th colspan="9"><span style="font-weight:normal"><br>         All characters in the range <code>‘\u0001’</code> to<br>         <code>‘\u007F’</code> are represented by a single byte:</span></th><br>     </tr><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_a">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_a">Byte 1</th><br>       <td><center>0</center><br>       </td><td colspan="7"><center>bits 6-0</center><br>     </td></tr><br>     <tr><br>       <th colspan="9"><span style="font-weight:normal"><br>         The null character <code>‘\u0000’</code> and characters<br>         in the range <code>‘\u0080’</code> to <code>‘\u07FF’</code> are<br>         represented by a pair of bytes:</span></th><br>     </tr><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_b">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_b">Byte 1</th><br>       <td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="5"><center>bits 10-6</center><br>     </td></tr><br>     <tr><br>       <th id="byte2_a">Byte 2</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 5-0</center><br>     </td></tr><br>     <tr><br>       <th colspan="9"><span style="font-weight:normal"><br>         <code>char</code> values in the range <code>‘\u0800’</code><br>         to <code>‘\uFFFF’</code> are represented by three bytes:</span></th><br>     </tr><br>     <tr><br>       <td></td><br>       <th colspan="8" id="bit_c">Bit Values</th><br>     </tr><br>     <tr><br>       <th id="byte1_c">Byte 1</th><br>       <td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="4"><center>bits 15-12</center><br>     </td></tr><br>     <tr><br>       <th id="byte2_b">Byte 2</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 11-6</center><br>     </td></tr><br>     <tr><br>       <th id="byte3">Byte 3</th><br>       <td><center>1</center><br>       </td><td><center>0</center><br>       </td><td colspan="6"><center>bits 5-0</center><br>     </td></tr><br>   </tbody></table>
+
+<p>其实readUTF()针对的编码是Modified UTF-8而不是UTF-8, 所以”1111 xxxx”四字节字符也是非法字符。</p>
+<h3><span id="参考阅读">参考阅读</span></h3><ul>
+<li><a href="https://www.cnblogs.com/skywang12345/p/io_14.html" target="_blank" rel="noopener">java io系列14之 DataInputStream(数据输入流)的认知、源码和示例 (本篇博客对原文部分内容进行了更正)</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate here.</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Deep WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Deep Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/maze/" rel="next" title="8421码构建迷宫与广度优先搜索走出迷宫">
+                <i class="fa fa-chevron-left"></i> 8421码构建迷宫与广度优先搜索走出迷宫
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/头像.jpg" alt="Deep">
+            
+              <p class="site-author-name" itemprop="name">Deep</p>
+              <p class="site-description motion-element" itemprop="description">丧向人格, 慢热选手</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NjustJiaweihan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:njustjiaweihan@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/ba-ye-21" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5106309307" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xyzghio.xyz" title="Aaron Zhu" target="_blank">Aaron Zhu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">非阻塞读read()与阻塞读readfully()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">阻塞跳过skipBytes()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">readUTF()中的Modified UTF-8字符串读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">第1步，读取出输入流中的UTF-8数据的长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">第2步，创建2个数组：字节数组bytearr 和 字符数组chararr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">第3步，将UTF-8数据全部读取到“字节数组bytearr”中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">第4步，先对UTF-8中开头的单字节数据进行转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.5.</span> <span class="nav-text">第5步，对“第4步处理”之后的数据，接着进行处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.6.</span> <span class="nav-text">第6步，将字符数组转换成String字符串，并返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.7.</span> <span class="nav-text">关于UTF-8与Modified UTF-8</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">参考阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">23.4k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("an5K6gmGlTjR0h1NfD9qUPTE-gzGzoHsz", "Vmx2FnJBOkazj24axAihzsiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
