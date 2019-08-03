@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JianZhiOffer,">
+  <meta name="keywords" content="FilterInputStream,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="先贴出代码实现 再来说思路吧">
-<meta name="keywords" content="JianZhiOffer">
+<meta name="description" content="FilterInputStream是InputStream的伪实现。">
+<meta name="keywords" content="FilterInputStream">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 38 字符串的排列">
-<meta property="og:url" content="http://yoursite.com/2019/05/24/剑指offer-38/index.html">
+<meta property="og:title" content="Java.io之FilterInputStream">
+<meta property="og:url" content="http://yoursite.com/2019/08/03/Java-io之FilterInputStream/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
-<meta property="og:description" content="先贴出代码实现 再来说思路吧">
+<meta property="og:description" content="FilterInputStream是InputStream的伪实现。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-20T06:27:35.000Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/03/ervyVO.png">
+<meta property="og:updated_time" content="2019-08-03T13:55:41.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 38 字符串的排列">
-<meta name="twitter:description" content="先贴出代码实现 再来说思路吧">
+<meta name="twitter:title" content="Java.io之FilterInputStream">
+<meta name="twitter:description" content="FilterInputStream是InputStream的伪实现。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/03/ervyVO.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/24/剑指offer-38/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/03/Java-io之FilterInputStream/">
 
 
 
 
 
-  <title>剑指offer 38 字符串的排列 | Deep's HomePage</title>
+  <title>Java.io之FilterInputStream | Deep's HomePage</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/剑指offer-38/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/Java-io之FilterInputStream/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Deep">
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">剑指offer 38 字符串的排列</h1>
+          <h1 class="post-title" itemprop="name headline">Java.io之FilterInputStream</h1>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T10:59:36+08:00">
-                2019-05-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T21:33:00+08:00">
+                2019-08-03
               </time>
             
 
@@ -315,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/剑指offer/" itemprop="url" rel="index">
-                    <span itemprop="name">剑指offer</span>
+                  <a href="/categories/Java-io/" itemprop="url" rel="index">
+                    <span itemprop="name">Java.io</span>
                   </a>
                 </span>
 
@@ -332,7 +334,7 @@
 
           
           
-             <span id="/2019/05/24/剑指offer-38/" class="leancloud_visitors" data-flag-title="剑指offer 38 字符串的排列">
+             <span id="/2019/08/03/Java-io之FilterInputStream/" class="leancloud_visitors" data-flag-title="Java.io之FilterInputStream">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.2k
+                  300
                 </span>
               
 
@@ -382,16 +384,18 @@
       
 
       
-        <p>先贴出代码实现 再来说思路吧</p>
-<a id="more"></a> 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;String&gt; <span class="title">Permutation</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(str == <span class="keyword">null</span> || str.length() == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        HashSet&lt;String&gt; res = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        Permutation(str.toCharArray(), res, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;(res);</span><br><span class="line"></span><br><span class="line">        Collections.sort(result);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Permutation</span><span class="params">(<span class="keyword">char</span>[] str, HashSet&lt;String&gt; res, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(index == str.length - <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">            String s = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">char</span> c : str) &#123;</span><br><span class="line"></span><br><span class="line">                s += c;</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(s);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//递归的前半段快速的将index定位到str尾部</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//这是真正全排列的地方</span></span><br><span class="line">            <span class="comment">//假定 abcd|efg 中在abdc已经选好顺序时的全排列 就是efg的全排列</span></span><br><span class="line">            <span class="comment">//此时index指向e 可以出现在index位置上的元素为e f g 分别交换就可以实现</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; str.length; i++)&#123;</span><br><span class="line">                <span class="comment">//首部字符和它后面的字符（包括自己）进行交换</span></span><br><span class="line">                swap(str, i, index);</span><br><span class="line">                <span class="comment">//递归求后面的字符的排列</span></span><br><span class="line">                Permutation(str, res, index+<span class="number">1</span>);</span><br><span class="line">                <span class="comment">//由于前面交换了一下，所以chs的内容改变了，我们要还原回来</span></span><br><span class="line">                swap(str, i, index);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//abcdefg</span></span><br><span class="line">                <span class="comment">//先ab交换成ba 全排列cdefg</span></span><br><span class="line">                <span class="comment">//在还原ab 这样就可以顺利ac交换成ca 全排列cdefg</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span> temp = str[m];</span><br><span class="line">        str[m] = str[n];</span><br><span class="line">        str[n] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Solution solution = <span class="keyword">new</span> Solution();</span><br><span class="line">        ArrayList&lt;String&gt; res = solution.Permutation(<span class="string">"abc"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(String s : res) &#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1><span id="递归思路">递归思路：</span></h1><p>思路其实不难理解<br>首先排定第一个位置 则整体的全排列 = 排定的第一个元素 + 剩余元素的全排列<br>以此类推 剩余元素的全排列 = 排定的剩余元素的第一个元素 + 剩剩余元素的全排列<br>很明显的递归思路 但是配合代码就有点不大好理解了 网上的blog大多没有讲清楚</p>
-<h1><span id="待排列字符串a-b-c-d">待排列字符串：a b c d</span></h1><p>约定：</p>
-<ol>
-<li>a<->b 代表swap(a, b)</-></li>
-<li>a<->a+1 代表a与a后面一个元素交换 a<->a+2同理</-></-></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Permutation(0) a&lt;-&gt;a 排定第一个元素</span><br><span class="line">    Permutation(1) b&lt;-&gt;b 排定第二个元素</span><br><span class="line">        Permutation(2) c&lt;-&gt;c 排定第三个元素</span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: abcd</span><br><span class="line">                Permutation(3)相当于d&lt;-&gt;d 现在要进行d&lt;-&gt;d+1 故要还原d&lt;-&gt;d </span><br><span class="line">            此时index=d+1越界了 说明结束 故返回</span><br><span class="line">        Permutation(2) 刚刚c&lt;-&gt;c 现在要进行c&lt;-&gt;c+1 故要还原c&lt;-&gt;c</span><br><span class="line">        此时index=c+1 完成c&lt;-&gt;d 字符串序列变为addx</span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: abdc</span><br><span class="line">        Permutation(2) 刚刚c&lt;-&gt;c+1 现在要进行c&lt;-&gt;c+2 故要还原c&lt;-&gt;c+1</span><br><span class="line">        此时index=c+2 越界 说明结束 返回</span><br><span class="line">    Permutation(1) 刚b&lt;-&gt;b 现在要进行b&lt;-&gt;b+1 故要还原b&lt;-&gt;b</span><br><span class="line">    此时index=b+1 完成b&lt;-&gt;b+1 字符串序列变为acxx</span><br><span class="line">        Permutation(2) b&lt;-&gt;b </span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: acbd</span><br><span class="line">        Permutation(2) 刚b&lt;-&gt;b 现在要进行b&lt;-&gt;b+1 故要还原b&lt;-&gt;b</span><br><span class="line">        此时index=b+1 完成b&lt;-&gt;b+1 字符串序列变为acdx</span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: acdb</span><br><span class="line">        Permutation(2) 刚刚b&lt;-&gt;b+1 现在要进行b&lt;-&gt;b+2 故要还原b&lt;-&gt;b+1</span><br><span class="line">        此时index=b+2 越界 说明结束 返回</span><br><span class="line">    Permutation(1) 刚b&lt;-&gt;b+1 现在要进行b&lt;-&gt;b+2 故要还原b&lt;-&gt;b+1</span><br><span class="line">    此时index=b+2 完成b&lt;-&gt;b+2 字符串序列变为adxx</span><br><span class="line">        Permutation(2) c&lt;-&gt;c </span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: adcb</span><br><span class="line">        Permutation(2) 刚c&lt;-&gt;c 现在要进行c&lt;-&gt;c+1 故要还原c&lt;-&gt;c</span><br><span class="line">        此时index=c+1 完成c&lt;-&gt;c+1 字符串序列变为adbx</span><br><span class="line">            Permutation(3) 只剩一个元素不用排 故排定第四个元素 存储结果: adbc</span><br><span class="line">        Permutation(2) 刚刚c&lt;-&gt;c+1 现在要进行c&lt;-&gt;c+2 故要还原c&lt;-&gt;c+1</span><br><span class="line">        此时index=c+2 越界 说明结束 返回</span><br><span class="line">    Permutation(1) 刚b&lt;-&gt;b+2 现在要进行b&lt;-&gt;b+3 故要还原b&lt;-&gt;b+2</span><br><span class="line">    此时index=b+3 越界 说明结束 返回</span><br><span class="line">Permutation(0) 刚a&lt;-&gt;a 现在要进行a&lt;-&gt;a+1 故要还原a&lt;-&gt;a</span><br><span class="line">    此时index=a+1 完成a&lt;-&gt;a+1 字符串序列变为bxxx</span><br><span class="line">    ...(写完了1以a开头的6种排列 剩下的思路类似 就不写了)</span><br></pre></td></tr></table></figure>
+        <p>FilterInputStream是InputStream的伪实现。</p>
+<a id="more"></a>
+<p>先来看下FilterInputStream源代码，可以发现所有方法都调用了其修饰的InputStream的对应方法，而没有任何新实现，所以是伪实现，FilterInputStream的目的是其各种各样的子类实现了对inputStream丰富的修饰，为其添加了各种各样的功能(比如缓冲与数据转换等)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span> </span>&#123;</span><br><span class="line">	 <span class="comment">//被修饰的InputStream</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">volatile</span> InputStream in;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">FilterInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.in = in;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> in.read();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[])</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> read(b, <span class="number">0</span>, b.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> in.read(b, off, len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">skip</span><span class="params">(<span class="keyword">long</span> n)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> in.skip(n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">available</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> in.available();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">mark</span><span class="params">(<span class="keyword">int</span> readlimit)</span> </span>&#123;</span><br><span class="line">        in.mark(readlimit);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        in.reset();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">markSupported</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> in.markSupported();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FilterInputStream及其常用子类的类图如下:</p>
+<p><img src="https://s2.ax1x.com/2019/08/03/ervyVO.png" alt="ervyVO.png"></p>
+<p>之前的blog对其子类分别进行了解析</p>
+<p><a href="https://www.deepblog.cn/2019/07/23/Java-io%E4%B9%8BBufferedInputStream%E4%B8%8EBufferedOutputStream/" target="_blank" rel="noopener">1. bufferedInputStream</a></p>
+<p>使得inputStream具有缓冲的功能。</p>
+<p><a href="https://www.deepblog.cn/2019/07/24/Java-io%E4%B9%8BDataInputStream%E4%B8%8EDataOutputStream/" target="_blank" rel="noopener">2. DateInputStream</a></p>
+<p>能以一种与机器无关的方式，直接从地从字节输入流读取JAVA基本类型和String类型的数据。</p>
+
       
     </div>
     
@@ -437,7 +441,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JianZhiOffer/" rel="tag"># JianZhiOffer</a>
+            <a href="/tags/FilterInputStream/" rel="tag"># FilterInputStream</a>
           
         </div>
       
@@ -450,8 +454,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/23/Mysql启动与密码重置/" rel="next" title="Mysql启动与密码重置">
-                <i class="fa fa-chevron-left"></i> Mysql启动与密码重置
+              <a href="/2019/08/03/Java-io之FileReader与FileWriter/" rel="next" title="Java.io之FileReader与FileWriter">
+                <i class="fa fa-chevron-left"></i> Java.io之FileReader与FileWriter
               </a>
             
           </div>
@@ -459,10 +463,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/25/TreeMap/" rel="prev" title="java.util.TreeMap">
-                java.util.TreeMap <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -514,17 +514,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -628,22 +619,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">递归思路：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">待排列字符串：a b c d</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
+<meta name="description" content="FileInputStream与FileOutputStream设计目的是通过File或者FileDescriptor对文件对象进行输入输出数据。">
 <meta name="keywords" content="FileInputStream">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java.io之FileInputStream与FileOutputStream">
 <meta property="og:url" content="http://yoursite.com/2019/07/23/Java-io之FileInputStream与FileOutputStream/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
-<meta property="og:description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
+<meta property="og:description" content="FileInputStream与FileOutputStream设计目的是通过File或者FileDescriptor对文件对象进行输入输出数据。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-23T10:18:22.213Z">
+<meta property="og:updated_time" content="2019-08-03T14:00:53.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java.io之FileInputStream与FileOutputStream">
-<meta name="twitter:description" content="FileInputStream与FileOutputStream设计目的通过File或者FileDescriptor对文件对象进行输入输出数据。 FileInputStream与FileOutputStream使用方法FileOutputStream源码解析字段12345678910111213//文件描述符//详情见&amp;lt;讨论-FileDescriptor&amp;gt;private final F">
+<meta name="twitter:description" content="FileInputStream与FileOutputStream设计目的是通过File或者FileDescriptor对文件对象进行输入输出数据。">
 
 
 
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  771
+                  763
                 </span>
               
 
@@ -382,8 +382,9 @@
       
 
       
-        <h2><span id="fileinputstream与fileoutputstream设计目的">FileInputStream与FileOutputStream设计目的</span></h2><p>通过File或者FileDescriptor对文件对象进行输入输出数据。</p>
-<h2><span id="fileinputstream与fileoutputstream使用方法">FileInputStream与FileOutputStream使用方法</span></h2><h2><span id="fileoutputstream源码解析">FileOutputStream源码解析</span></h2><h3><span id="字段">字段</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件描述符</span></span><br><span class="line"><span class="comment">//详情见&lt;讨论-FileDescriptor&gt;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FileDescriptor fd;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否进行内容扩充--true表示保留原文件中内容基础上扩充数据; false则覆盖原数据</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> append;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FileChannel是一个连接到文件的通道。可以通过文件通道读写文件。</span></span><br><span class="line"><span class="comment">//FileChannel无法设置为非阻塞模式，它总是运行在阻塞模式下</span></span><br><span class="line"><span class="keyword">private</span> FileChannel channel;</span><br><span class="line"></span><br><span class="line"><span class="comment">//等同于File.getPath--文件路径字符串</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String path;</span><br></pre></td></tr></table></figure>
+        <p>FileInputStream与FileOutputStream设计目的是通过File或者FileDescriptor对文件对象进行输入输出数据。</p>
+<a id="more"></a>
+<h3><span id="字段">字段</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件描述符</span></span><br><span class="line"><span class="comment">//详情见&lt;讨论-FileDescriptor&gt;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FileDescriptor fd;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否进行内容扩充--true表示保留原文件中内容基础上扩充数据; false则覆盖原数据</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> append;</span><br><span class="line"></span><br><span class="line"><span class="comment">//FileChannel是一个连接到文件的通道。可以通过文件通道读写文件。</span></span><br><span class="line"><span class="comment">//FileChannel无法设置为非阻塞模式，它总是运行在阻塞模式下</span></span><br><span class="line"><span class="keyword">private</span> FileChannel channel;</span><br><span class="line"></span><br><span class="line"><span class="comment">//等同于File.getPath--文件路径字符串</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String path;</span><br></pre></td></tr></table></figure>
 <h3><span id="主要方法">主要方法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将byte数组内容写入文件输出流</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将byte[off]到byte[off+length]写入文件输出流</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//将字节b写入文件输出流</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> b)</span></span></span><br></pre></td></tr></table></figure>
 <h2><span id="fileinputstream源码解析">FileInputStream源码解析</span></h2><h3><span id="字段">字段</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//比FileOutputStream少了append</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FileDescriptor fd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> FileChannel channel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String path;</span><br></pre></td></tr></table></figure>
 <h3><span id="主要方法">主要方法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//都是比较常规的IO方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从文件输入流中读取一个字节并返回</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//从文件输入流中读取b.length个字节到b中</span></span></span><br><span class="line"><span class="function"><span class="comment">//@return 实际读取的字节数</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">skip</span><span class="params">(<span class="keyword">long</span> n)</span></span></span><br></pre></td></tr></table></figure>
@@ -550,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -572,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -647,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">FileInputStream与FileOutputStream设计目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">FileInputStream与FileOutputStream使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">FileOutputStream源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">FileInputStream源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">FileDescriptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">append</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">参考阅读</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">主要方法</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">FileInputStream源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">主要方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">FileDescriptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">append</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">参考阅读</span></a></li></div>
             
 
           </div>
@@ -681,7 +682,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.7k</span>
+    <span title="Site words total count">28.1k</span>
   
 </div>
 
