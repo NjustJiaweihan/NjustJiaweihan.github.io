@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Mac装机-文档,">
+  <meta name="keywords" content="PushbackInputStream,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="I support all the original Markdown syntaxes. But I can do so much more! Various popular but non-standard syntaxes can be turned on/off from the Markdown preference pane.  You can specify extra HTML r">
-<meta name="keywords" content="Mac装机-文档">
+<meta name="description" content="缓存的新应用之一就是回推（pushback）的实现。回推用于输入流，以允许读取字节，然后再将它们返回（回推）到流中。PushbackInputStream类实现了这一思想，提供了一种机制，可以“偷窥”来自输入流的内容而不对它们进行破坏，使用场景比如读取含有特定分隔符的长句子时，可以在读取到分隔符时回推，下一次读取依然可以读取到这次回推掉的字节。">
+<meta name="keywords" content="PushbackInputStream">
 <meta property="og:type" content="article">
-<meta property="og:title" content="macDown语法中文文档">
-<meta property="og:url" content="http://yoursite.com/2019/05/28/macDown语法/index.html">
+<meta property="og:title" content="Java.io之PushbackInputStream">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/Java-io之PushbackInputStream/index.html">
 <meta property="og:site_name" content="Deep&#39;s HomePage">
-<meta property="og:description" content="I support all the original Markdown syntaxes. But I can do so much more! Various popular but non-standard syntaxes can be turned on/off from the Markdown preference pane.  You can specify extra HTML r">
+<meta property="og:description" content="缓存的新应用之一就是回推（pushback）的实现。回推用于输入流，以允许读取字节，然后再将它们返回（回推）到流中。PushbackInputStream类实现了这一思想，提供了一种机制，可以“偷窥”来自输入流的内容而不对它们进行破坏，使用场景比如读取含有特定分隔符的长句子时，可以在读取到分隔符时回推，下一次读取依然可以读取到这次回推掉的字节。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-20T06:59:28.000Z">
+<meta property="og:updated_time" content="2019-08-04T11:32:55.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="macDown语法中文文档">
-<meta name="twitter:description" content="I support all the original Markdown syntaxes. But I can do so much more! Various popular but non-standard syntaxes can be turned on/off from the Markdown preference pane.  You can specify extra HTML r">
+<meta name="twitter:title" content="Java.io之PushbackInputStream">
+<meta name="twitter:description" content="缓存的新应用之一就是回推（pushback）的实现。回推用于输入流，以允许读取字节，然后再将它们返回（回推）到流中。PushbackInputStream类实现了这一思想，提供了一种机制，可以“偷窥”来自输入流的内容而不对它们进行破坏，使用场景比如读取含有特定分隔符的长句子时，可以在读取到分隔符时回推，下一次读取依然可以读取到这次回推掉的字节。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/28/macDown语法/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/Java-io之PushbackInputStream/">
 
 
 
 
 
-  <title>macDown语法中文文档 | Deep's HomePage</title>
+  <title>Java.io之PushbackInputStream | Deep's HomePage</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/macDown语法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Java-io之PushbackInputStream/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Deep">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">macDown语法中文文档</h1>
+          <h1 class="post-title" itemprop="name headline">Java.io之PushbackInputStream</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-28T10:45:10+08:00">
-                2019-05-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-04T18:34:47+08:00">
+                2019-08-04
               </time>
             
 
@@ -303,6 +303,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-io/" itemprop="url" rel="index">
+                    <span itemprop="name">Java.io</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -310,7 +332,7 @@
 
           
           
-             <span id="/2019/05/28/macDown语法/" class="leancloud_visitors" data-flag-title="macDown语法中文文档">
+             <span id="/2019/08/04/Java-io之PushbackInputStream/" class="leancloud_visitors" data-flag-title="Java.io之PushbackInputStream">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -335,7 +357,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  320
+                  375
                 </span>
               
 
@@ -360,28 +382,11 @@
       
 
       
-        <p>I support all the original Markdown syntaxes. But I can do so much more! Various popular but non-standard syntaxes can be turned on/off from the Markdown preference pane.</p>
-
-<p>You can specify extra <strong>HTML</strong> rendering options through the Rendering preference pane.<br><a id="more"></a><br>You can customize the editor window to you liking in the Editor preferences pane:</p>
-<p>You can configure various application (that’s me!) behaviors in the General preference pane.</p>
-<h3><span id="基本语法the-basics">基本语法(The Basics)</span></h3><p>Before I tell you about all the extra syntaxes and capabilities I have, I’ll introduce you to the basics of standard markdown. If you already know markdown, and want to jump straight to learning about the fancier things I can do, I suggest you skip to the Markdown preference pane. Lets jump right in.</p>
-<h3><span id="换行line-breaks">换行(Line Breaks)</span></h3><p>两个空格+一个回车可以强制换行。</p>
-<p>Here is the code:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">This two-line bullet<span class="tag">&lt;<span class="name">Space</span>&gt;</span><span class="tag">&lt;<span class="name">Space</span>&gt;</span><span class="tag">&lt;<span class="name">Enter</span>&gt;</span>will break</span><br><span class="line"></span><br><span class="line">This two-line bullet  </span><br><span class="line">will break</span><br></pre></td></tr></table></figure>
-<h3><span id="strong-and-emphasize">Strong and Emphasize</span></h3><p><strong>加粗</strong>(Strong) 快捷键Command-B:</p>
-<p><code>**Strong**</code> or  <code>__Strong__</code> </p>
-<p><em>斜体</em>(Emphasize) 快捷键Command-I: </p>
-<p><code>*Emphasize*</code> or  <code>_Emphasize_1</code> </p>
-<h3><span id="标题headers">标题(Headers)</span></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Header 1</span><br><span class="line">## Header 2</span><br><span class="line">### Header 3</span><br><span class="line">#### Header 4</span><br><span class="line">##### Header 5</span><br><span class="line">###### Header 6</span><br></pre></td></tr></table></figure>
-<h3><span id="超链接与邮件连接links-and-email">超链接与邮件连接(Links and Email)</span></h3><h4><span id="内链接inline">内链接(Inline)</span></h4><p>Just put angle brackets around an email and it becomes clickable: <a href="mailto:&#x75;&#x72;&#97;&#110;&#117;&#115;&#106;&#114;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#x75;&#x72;&#97;&#110;&#117;&#115;&#106;&#114;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uranusjr@gmail.com&gt;</span><br></pre></td></tr></table></figure>
-<p>Same thing with urls: <a href="http://macdown.uranusjr.com" target="_blank" rel="noopener">http://macdown.uranusjr.com</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;http://macdown.uranusjr.com&gt;</span><br></pre></td></tr></table></figure>
-<p>Perhaps you want to some link text like this: <a href>Macdown Website</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Macdown Website](http://macdown.uranusjr.com)</span><br></pre></td></tr></table></figure>
-<h4><span id="reference-style">Reference style</span></h4><p>Sometimes it looks too messy to include big long urls inline, or you want to keep all your urls together.</p>
-<p>TODO 20190528</p>
-
+        <p>缓存的新应用之一就是回推（pushback）的实现。回推用于输入流，以允许读取字节，然后再将它们返回（回推）到流中。PushbackInputStream类实现了这一思想，提供了一种机制，可以“偷窥”来自输入流的内容而不对它们进行破坏，使用场景比如读取含有特定分隔符的长句子时，可以在读取到分隔符时回推，下一次读取依然可以读取到这次回推掉的字节。</p>
+<a id="more"></a>
+<h3><span id="pushbackinputstream用法">PushbackInputStream用法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.deepblog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOSourceCode7</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"/Users/deep/Desktop/file.txt"</span>);</span><br><span class="line"></span><br><span class="line">        file.createNewFile();</span><br><span class="line"></span><br><span class="line">        BufferedOutputStream bout = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(file));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//非0序列 利用PushbackInputStream将非数字替换未0</span></span><br><span class="line">        bout.write(<span class="string">"167a256"</span>.getBytes());</span><br><span class="line"></span><br><span class="line">        bout.flush();</span><br><span class="line"></span><br><span class="line">        bout.close();</span><br><span class="line"></span><br><span class="line">        PushbackInputStream pbin = <span class="keyword">new</span> PushbackInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> r;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (pbin.available() &gt; <span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">            r = pbin.read();</span><br><span class="line">            <span class="comment">//字符0-9的int值: 48-57</span></span><br><span class="line">            <span class="keyword">if</span>(r &gt; <span class="number">57</span> || r &lt; <span class="number">48</span>)&#123;</span><br><span class="line">                pbin.unread(<span class="number">48</span>);</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                res.add(r - <span class="number">48</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : res)&#123;</span><br><span class="line">            System.out.print(num + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">控制台输出：</span><br><span class="line"><span class="number">1</span> <span class="number">6</span> <span class="number">7</span> <span class="number">0</span> <span class="number">2</span> <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<h3><span id="unread">unread()</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unread</span><span class="params">(<span class="keyword">int</span> b)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    ensureOpen();</span><br><span class="line">    <span class="keyword">if</span> (pos == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Push back buffer is full"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    buf[--pos] = (<span class="keyword">byte</span>)b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unread</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    ensureOpen();</span><br><span class="line">    <span class="keyword">if</span> (len &gt; pos) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Push back buffer is full"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    pos -= len;</span><br><span class="line">    System.arraycopy(b, off, buf, pos, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="不支持mark">不支持mark()</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">markSupported</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">mark</span><span class="params">(<span class="keyword">int</span> readlimit)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"mark/reset not supported"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -427,7 +432,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mac装机-文档/" rel="tag"># Mac装机-文档</a>
+            <a href="/tags/PushbackInputStream/" rel="tag"># PushbackInputStream</a>
           
         </div>
       
@@ -440,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/25/TreeMap/" rel="next" title="java.util.TreeMap">
-                <i class="fa fa-chevron-left"></i> java.util.TreeMap
+              <a href="/2019/08/04/Java-io之InputStreamReader/" rel="next" title="Java.io之InputStreamReader">
+                <i class="fa fa-chevron-left"></i> Java.io之InputStreamReader
               </a>
             
           </div>
@@ -449,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/17/sql_practice遇到的问题/" rel="prev" title="sql语句练习题">
-                sql语句练习题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -628,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">基本语法(The Basics)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">换行(Line Breaks)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Strong and Emphasize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">标题(Headers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">超链接与邮件连接(Links and Email)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">内链接(Inline)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">Reference style</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">PushbackInputStream用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">unread()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">不支持mark()</span></a></li></ol></div>
             
 
           </div>
