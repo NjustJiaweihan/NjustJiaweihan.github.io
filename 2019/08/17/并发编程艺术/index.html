@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="减少上下文切换引起上下文切换的原因大概有以下几种:   当前执行任务的时间片用完之后, 系统CPU正常调度下一个任务  当前执行任务碰到IO阻塞, 调度器将挂起此任务, 继续下一任务  多个任务抢占锁资源, 当前任务没有抢到,被调度器挂起, 继续下一任务  用户代码挂起当前任务, 让出CPU时间  硬件中断   无锁并发编程 如锁分段 将数据的ID按照Hash分段 不同线程处理不同段数据。 CAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程艺术">
+<meta property="og:url" content="http://yoursite.com/2019/08/17/并发编程艺术/index.html">
+<meta property="og:site_name" content="Deep&#39;s HomePage">
+<meta property="og:description" content="减少上下文切换引起上下文切换的原因大概有以下几种:   当前执行任务的时间片用完之后, 系统CPU正常调度下一个任务  当前执行任务碰到IO阻塞, 调度器将挂起此任务, 继续下一任务  多个任务抢占锁资源, 当前任务没有抢到,被调度器挂起, 继续下一任务  用户代码挂起当前任务, 让出CPU时间  硬件中断   无锁并发编程 如锁分段 将数据的ID按照Hash分段 不同线程处理不同段数据。 CAS">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/17/muoVt1.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/17/mubRi9.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m3M3h6.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/19/m3jgbj.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/20/m8OtgS.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/20/m8OBEn.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/20/m8OcgU.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/20/mJHMWT.jpg">
+<meta property="og:updated_time" content="2019-08-20T13:58:57.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并发编程艺术">
+<meta name="twitter:description" content="减少上下文切换引起上下文切换的原因大概有以下几种:   当前执行任务的时间片用完之后, 系统CPU正常调度下一个任务  当前执行任务碰到IO阻塞, 调度器将挂起此任务, 继续下一任务  多个任务抢占锁资源, 当前任务没有抢到,被调度器挂起, 继续下一任务  用户代码挂起当前任务, 让出CPU时间  硬件中断   无锁并发编程 如锁分段 将数据的ID按照Hash分段 不同线程处理不同段数据。 CAS">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/17/muoVt1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/17/并发编程艺术/">
+
+
+
+
+
+  <title>并发编程艺术 | Deep's HomePage</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Deep's HomePage</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/17/并发编程艺术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deep">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Deep's HomePage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">并发编程艺术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-17T16:34:29+08:00">
+                2019-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/17/并发编程艺术/" class="leancloud_visitors" data-flag-title="并发编程艺术">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3><span id="减少上下文切换">减少上下文切换</span></h3><p>引起上下文切换的原因大概有以下几种: </p>
+<ol>
+<li>当前执行任务的时间片用完之后, 系统CPU正常调度下一个任务 </li>
+<li>当前执行任务碰到IO阻塞, 调度器将挂起此任务, 继续下一任务 </li>
+<li>多个任务抢占锁资源, 当前任务没有抢到,被调度器挂起, 继续下一任务 </li>
+<li>用户代码挂起当前任务, 让出CPU时间 </li>
+<li>硬件中断</li>
+</ol>
+<ul>
+<li>无锁并发编程 如锁分段 将数据的ID按照Hash分段 不同线程处理不同段数据。</li>
+<li>CAS算法 不需要加锁的数据更新算法</li>
+<li>使用最少的线程 避免创建不需要的线程</li>
+<li>协程 在单个线程内实现多任务切换</li>
+</ul>
+<p>减少waiting线程数就可以减少上下午切换 因为每一次从waiting到runnable都会引起一次上下午切换。</p>
+<h3><span id="避免死锁的常见方法">避免死锁的常见方法</span></h3><p>死锁出现时一定有两个及以上的资源</p>
+<ul>
+<li>避免一个线程同时获得多个锁</li>
+<li>避免一个线程在锁内占有多个资源 尽量一个锁一个资源</li>
+</ul>
+<p>死锁是循环抢占长时间</p>
+<ul>
+<li>尝试使用定时锁lock.tryLock(timeout)来替代内部锁机制</li>
+<li>对于数据库锁 加锁和解锁应该在一个数据库连接中 否则会出现解锁失败的情况</li>
+</ul>
+<h3><span id="volatile">volatile</span></h3><p>Java编程语言运行线程间访问共享变量 但要保证变量被准确和一致性的更新 线程应该用排他锁来获取这个变量。Java内存模型保证了所有线程看到的被volatile修饰的变量的值是一致的。</p>
+<p>volatile修饰的共享变量在进行写操作的时候会多出一行汇编代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> Singleton instance;</span><br><span class="line">instance = <span class="keyword">new</span> Singleton();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x01a3de1d: movb $0x0, 0x1104800(%esi);</span><br><span class="line">0x01a3de24: lock addl $0x0, (%esp);</span><br></pre></td></tr></table></figure>
+<p>lock前缀是JVM加的 lock前缀的指令在多核处理器下会发生两件事情：</p>
+<ul>
+<li>将当前处理器缓存行的数据写回到系统内存</li>
+<li>这个写回内存的操作会使其他CPU里缓存了该内存地址的数据无效 这是依靠缓存一致性协议 每个CPU通过嗅探总线上传播的数据来检查自己的缓存值是否过期 若过期则将相应的缓存行标记为无效状态 当再次从缓存中读取该无效数据时 就会进去内存读取 </li>
+</ul>
+<p>实现lock的两个协议：</p>
+<ol>
+<li>缓存锁定保证该操作<strong>原子性</strong>：这期间该缓存被锁定 缓存一致性机制会阻止同时修改该数据。</li>
+<li>MESI协议实现其他CPU数据无效来保证<strong>一致性</strong>：通过嗅探一个处理器来检测其他处理器打算写内存地址 而这个地址当前处于共享状态 那么正在嗅探的处理器就会将其缓存行无效 下次访问该数据时 强制使用缓存行填充。</li>
+</ol>
+<h3><span id="synchronized">synchronized</span></h3><p>Java中的每个对象都可以作为锁</p>
+<ul>
+<li>对于普通同步方法 锁是当前实例对象</li>
+<li>对于静态同步方法 锁是当前类的Class对象</li>
+<li>对于同步方法块 锁是Synchronized括号中的对象</li>
+</ul>
+<h4><span id="锁的存储结构">锁的存储结构</span></h4><p>当一个线程访问同步代码块时 必须获得锁 退出或者异常时释放锁。</p>
+<p>JVM基于进入和退出Monitor来实现代码块的同步 moniter enter指令在编译后被插入到同步代码块开始位置 monitor exit插入到同步代码块结束位置或者异常位置 任何对象都有一个monitor与之关联 当一个monitor被持有后 其会进入锁定状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">插播一条：</span><br><span class="line"></span><br><span class="line">	一个字等于多少个字节，与系统硬件（总线、cpu命令字位数等）有关，不应该毫无前提地说一个字等于多少位。</span><br><span class="line"></span><br><span class="line">正确的说法：</span><br><span class="line"></span><br><span class="line">①：1字节（byte） = 8位（bit）</span><br><span class="line"></span><br><span class="line">②：在16位的系统中（比如8086微机） 1字 （word）= 2字节（byte）= 16（bit）</span><br><span class="line"></span><br><span class="line">   在32位的系统中（比如win32）    1字（word）= 4字节（byte）= 32（bit）</span><br><span class="line"></span><br><span class="line">   在64位的系统中（比如win64）    1字（word）= 8字节（byte）= 64（bit）</span><br></pre></td></tr></table></figure>
+<p>synchronized的锁存在<strong>对象头</strong>里</p>
+<table>
+<thead>
+<tr>
+<th>长度</th>
+<th>内容</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32/64bit</td>
+<td>Mark Word</td>
+<td>存储对象的hashcode，分代年龄与锁信息</td>
+</tr>
+<tr>
+<td>32/64bit</td>
+<td>Class matedata Address</td>
+<td>存储一个指向对象类型数据的指针</td>
+</tr>
+<tr>
+<td>32/32bit</td>
+<td>Array Length</td>
+<td>对象如果是数组则存储其长度</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://s2.ax1x.com/2019/08/17/muoVt1.jpg" alt="muoVt1.jpg"></p>
+<h4><span id="锁升级">锁升级</span></h4><p>Java 1.6 为了减少获得锁和释放锁带来的性能消耗而引入偏向锁和轻量级锁。</p>
+<p>锁的四种状态：锁能升级不能降级</p>
+<ul>
+<li>无锁</li>
+<li>偏向锁</li>
+<li>轻量级锁</li>
+<li>重量级锁</li>
+</ul>
+<h5><span id="偏向锁">偏向锁</span></h5><p>大多数情况下锁不存在多线程竞争 而是有一个线程多次获得 为了降低线程获得锁的代价 从而引入偏向锁。</p>
+<p>偏向锁的实现是在对象头中记录获得锁的线程ID</p>
+<p>当一个线程到来时获得锁的步骤：</p>
+<ul>
+<li>简单测试一下对象头中存的ID是不是该线程ID</li>
+<li>若是 则不需要进行CAS操作来加锁解锁 该线程直接获得锁</li>
+<li>若失败 检查对象头mark word里偏向锁标志位是否为1 </li>
+<li>若不是 该线程去竞争锁</li>
+<li>若是 用CAS在对象头中存下该线程ID</li>
+</ul>
+<p><strong>偏向锁的撤销</strong>TODO</p>
+<h5><span id="轻量级锁">轻量级锁</span></h5><p>加锁</p>
+<p>当线程执行同步代码块时 JVM会在其栈帧中创建存储锁信息的空间 然后将锁住的对象的mark word复制到栈帧锁信息空间中去 然后用CAS将mark word替换为指向锁信息的指针 如果成功 线程获得锁 如果失败 表明还有其他线程已经获得轻量级锁 于是该线程尝试使用原地自旋(CAS的循环尝试)来等待获得锁</p>
+<p>解锁</p>
+<p>解锁时会使用CAS将锁信息替换回到Mark word中 如果成功 表示锁不存在竞争 锁释放 如果失败 说明有线程在争夺锁 所以当前锁存在竞争 释放锁 轻量级锁膨胀为重量级锁</p>
+<p>为了避免无用的自旋消耗CPU 当锁升级为重量级锁时 竞争该锁的线程进入阻塞 锁释放时唤醒这些线程 进入竞争。</p>
+<h5><span id="重量锁">重量锁</span></h5><p><img src="https://s2.ax1x.com/2019/08/17/mubRi9.jpg" alt="mubRi9.jpg"></p>
+<h3><span id="原子操作">原子操作</span></h3><p>CAS有三个参数：内存值(即当前值)，期望值，更新值，只有当内存值==期望值时才更新成功。</p>
+<p>处理器使用缓存锁定和总线锁定来保证复杂操作的原子性。</p>
+<ul>
+<li>缓存锁定 修改内部内存地址 然后利用缓存一致性机制(阻止其他CPU修改被多个CPU缓存的内存数据)</li>
+<li>总线锁定 利用处理器提供的LOCK#信号 当一个处理器在总线上传输 开销较大</li>
+</ul>
+<p>当数据不能被缓存或者跨多个缓存行是 会使用总线锁定</p>
+<h4><span id="java实现原子操作">Java实现原子操作</span></h4><ul>
+<li>循环CAS来实现</li>
+</ul>
+<p>CAS三大问题：</p>
+<ol>
+<li>ABA问题：如果一个变量原来是A 后来变成了B 最后又变成了A 那CAS会认为其没有变过 解决方法就是使用版本号 这样就变为1A-&gt;2B-3A atomic包中的AtomicStampedReferance解决了这个问题。</li>
+<li>循环时间开销大</li>
+<li>只能保证一个共享变量的原子操作 解决方法就是使用AtomicReferance(其可以保证引用对象操作的原子性)，将多个变量放在一个对象中。</li>
+</ol>
+<ul>
+<li>通过锁来实现 除了偏向锁 都使用了CAS来实现锁</li>
+</ul>
+<h2><span id="java内存模型">Java内存模型</span></h2><ul>
+<li>线程间通信：用何种方式来交换信息</li>
+</ul>
+<ol>
+<li>共享内存 隐式通信 <strong>(Java并发采用的编程模型)</strong></li>
+<li>消息传递 显式通信</li>
+</ol>
+<ul>
+<li>线程间同步：控制线程间操作执行的相对顺序</li>
+</ul>
+<ol>
+<li>在共享内存并发模型中 同步是显式的 程序员必须显式在某个方法或代码块上指定线程互斥执行</li>
+<li>在消息传递并发模型中 同步是隐式的 因为消息的发送必须在接收之前 没有任何显式定义</li>
+</ol>
+<p>所有实例域，静态域，数组在堆上 受到并发编程的影响<br>方法形参 局部变量 异常处理参数 线程私有 不受并发编程影响</p>
+<h3><span id="java内存模型jmm与线程通信">Java内存模型JMM与线程通信</span></h3><p>线程通信由JMM控制 JMM决定一个线程对共享变量的写入何时对另一个线程可见。线程间通信过程 线程A要想和线程B通信 先将线程A本地内存共享变量值写入主内存 线程B读取主内存共享变量值 并更新自己本地内存的共享变量值。</p>
+<h4><span id="指令序列的重排序">指令序列的重排序</span></h4><p>现代的处理器使用写缓冲区临时保存向内存写入的数据 然后将数据刷新到内存中 但这并不保证刷新时读写操作的顺序就是内存实际发生的读写操作顺序。<strong>(内存操作顺序被重排)</strong></p>
+<h4><span id="内存屏障指令防止部分指令重排序的">内存屏障指令(防止部分指令重排序的)</span></h4><p><img src="https://s2.ax1x.com/2019/08/19/m3M3h6.jpg" alt="m3M3h6.jpg"></p>
+<h3><span id="顺序一致性内存模型">顺序一致性内存模型</span></h3><p>未同步程序在顺序一致性内存模型中可能的执行情况</p>
+<p><img src="https://s2.ax1x.com/2019/08/19/m3jgbj.jpg" alt="m3jgbj.jpg"></p>
+<p>未同步程序在JMM与顺序一致性内存模型(SCMM)中执行的差异</p>
+<ul>
+<li>SCMM保证单线程程序按顺序执行 JMM不保证 会进行指令重排序</li>
+<li>SCMM保证所有线程看到一致的总执行顺序 JMM不保证</li>
+<li>JMM不保证在32位机上的64位的long与double读写的原子性 SCMM保证</li>
+</ul>
+<h3><span id="volatile的内存语义及其实现">volatile的内存语义及其实现</span></h3><p>volatile变量特性：</p>
+<ul>
+<li>可见性 对volatile变量的读 总是能看到任意线程对这个变量最后的写</li>
+<li>原子性 volatile变量的读写具有原子性 但类似于volatile++的操作不具有原子性</li>
+</ul>
+<p>所以多线程下这两段代码的语义是一样的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">volatileExample</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">long</span> i = <span class="number">0L</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setI</span><span class="params">(<span class="keyword">long</span> l)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        i = l;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAndIncrement</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getI</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">volatileExample2</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> i = <span class="number">0L</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setI</span><span class="params">(<span class="keyword">long</span> l)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        i = l;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAndIncrement</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> temp = getI();</span><br><span class="line">        temp++;</span><br><span class="line">        setI(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">long</span> <span class="title">getI</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>volatile写的内存语义：</p>
+<p>当写一个volatile变量时 JMM会将对变量的修改刷新到主内存中去。</p>
+<p>volatile读的内存语义：</p>
+<p>当读一个volatile变量时 JMM会将本地内存的值失效 线程从主内存中去读取。</p>
+<p>总结：</p>
+<p>线程A写一个volatile变量时相当于给线程B发送了对变量修改的情况的消息 线程B读一个volatile变量时相当于接收了线程A发出的修改情况的消息 所以就相当于线程A通过主内存与线程B进行通信。</p>
+<h4><span id="volatile内存语义的实现">volatile内存语义的实现</span></h4><p>编译器重排序规则和处理器内存屏障来保障(具体还不理解)</p>
+<p><img src="https://s2.ax1x.com/2019/08/20/m8OtgS.jpg" alt="m8OtgS.jpg"></p>
+<p><img src="https://s2.ax1x.com/2019/08/20/m8OBEn.jpg" alt="m8OBEn.jpg"></p>
+<p><img src="https://s2.ax1x.com/2019/08/20/m8OcgU.jpg" alt="m8OcgU.jpg"></p>
+<h3><span id="锁的内存语义">锁的内存语义</span></h3><p>锁除了让临界区互斥执行外 还可以让释放锁的线程向获取同一个锁的线程发送消息。因此线程A在释放锁之前所有可见的共享变量在线程B获取同一个锁之后将立即变得对B可见。(与volatile的写-读的内存语义一样)</p>
+<p><strong>当线程释放锁时 JMM会将该线程对应的本地内存中的共享变量刷新到主内存中去。</strong></p>
+<p><strong>当线程释放锁时，JMM会将该线程对应的本地内存置为无效 从而使得被监视器保护的临界区代码必须从主内存中读取共享变量。</strong></p>
+<h3><span id="锁的内存语义的实现">锁的内存语义的实现</span></h3><h2><span id="并发编程">并发编程</span></h2><h3><span id="线程状态">线程状态</span></h3><p><img src="https://s2.ax1x.com/2019/08/20/mJHMWT.jpg" alt="mJHMWT.jpg"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate here.</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Deep WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Deep Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/15/Mysql-锁/" rel="next" title="Mysql-锁">
+                <i class="fa fa-chevron-left"></i> Mysql-锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/22/Java基础-反射/" rel="prev" title="Java基础-反射">
+                Java基础-反射 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/头像.jpg" alt="Deep">
+            
+              <p class="site-author-name" itemprop="name">Deep</p>
+              <p class="site-description motion-element" itemprop="description">丧向人格, 慢热选手</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NjustJiaweihan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:njustjiaweihan@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/ba-ye-21" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5106309307" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xyzghio.xyz" title="Aaron Zhu" target="_blank">Aaron Zhu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">减少上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">避免死锁的常见方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">锁的存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">锁升级</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.1.</span> <span class="nav-text">偏向锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.2.</span> <span class="nav-text">轻量级锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.3.</span> <span class="nav-text">重量锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Java实现原子操作</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Java内存模型JMM与线程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">指令序列的重排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">内存屏障指令(防止部分指令重排序的)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">顺序一致性内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">volatile的内存语义及其实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">volatile内存语义的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">锁的内存语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">锁的内存语义的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">线程状态</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">42.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("an5K6gmGlTjR0h1NfD9qUPTE-gzGzoHsz", "Vmx2FnJBOkazj24axAihzsiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

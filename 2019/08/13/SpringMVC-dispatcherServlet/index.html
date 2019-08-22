@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dispatcherServlet,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SpringMVC整体运行机制   用户发送请求至前端控制器DispatcherServlet  DispatcherServlet收到请求调用HandlerMapping处理器映射器。  处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。  DispatcherServlet通过HandlerAdapter处理器">
+<meta name="keywords" content="dispatcherServlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC-dispatcherServlet">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/SpringMVC-dispatcherServlet/index.html">
+<meta property="og:site_name" content="Deep&#39;s HomePage">
+<meta property="og:description" content="SpringMVC整体运行机制   用户发送请求至前端控制器DispatcherServlet  DispatcherServlet收到请求调用HandlerMapping处理器映射器。  处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。  DispatcherServlet通过HandlerAdapter处理器">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/13/mCipvD.jpg">
+<meta property="og:updated_time" content="2019-08-13T09:33:57.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC-dispatcherServlet">
+<meta name="twitter:description" content="SpringMVC整体运行机制   用户发送请求至前端控制器DispatcherServlet  DispatcherServlet收到请求调用HandlerMapping处理器映射器。  处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。  DispatcherServlet通过HandlerAdapter处理器">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/13/mCipvD.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/13/SpringMVC-dispatcherServlet/">
+
+
+
+
+
+  <title>SpringMVC-dispatcherServlet | Deep's HomePage</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Deep's HomePage</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/SpringMVC-dispatcherServlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deep">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Deep's HomePage">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SpringMVC-dispatcherServlet</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-13T16:01:39+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringMVC/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringMVC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/13/SpringMVC-dispatcherServlet/" class="leancloud_visitors" data-flag-title="SpringMVC-dispatcherServlet">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.6k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>SpringMVC整体运行机制</p>
+<p><img src="https://s2.ax1x.com/2019/08/13/mCipvD.jpg" alt="mCipvD.jpg"></p>
+<ul>
+<li><p>用户发送请求至前端控制器DispatcherServlet</p>
+</li>
+<li><p>DispatcherServlet收到请求调用HandlerMapping处理器映射器。</p>
+</li>
+<li><p>处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。</p>
+</li>
+<li><p>DispatcherServlet通过HandlerAdapter处理器适配器调用处理器</p>
+</li>
+<li><p>执行处理器(Controller，也叫后端控制器)。</p>
+</li>
+<li><p>Controller执行完成返回ModelAndView</p>
+</li>
+<li><p>HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet</p>
+</li>
+<li><p>DispatcherServlet将ModelAndView传给ViewReslover视图解析器</p>
+</li>
+<li><p>ViewReslover解析后返回具体View</p>
+</li>
+<li><p>DispatcherServlet对View进行渲染视图（即将模型数据填充至视图中）。</p>
+</li>
+<li><p>DispatcherServlet响应用户。</p>
+</li>
+</ul>
+<p>从上面可以看出，DispatcherServlet有接收请求，响应结果，转发等作用。有了DispatcherServlet之后，可以减少组件之间的耦合度。</p>
+<h3><span id="handlermapping">HandlerMapping</span></h3><p>当DispatcherServlet接受到客户端的请求后，SpringMVC 通过 HandlerMapping 找到请求的Controller HandlerMapping 在这里起到<strong>路由</strong>的作用，负责找到请求的Controller。</p>
+<p>Spring MVC 默认提供了4种 HandlerMapping的实现</p>
+<ul>
+<li>org.springframework.web.servlet.handler.<strong>SimpleUrlHandlerMapping</strong><br>通过配置请求路径和Controller映射建立关系，找到相应的Controller<br>访问方式: <a href="http://ip:port/project/userlist.htm" target="_blank" rel="noopener">http://ip:port/project/userlist.htm</a></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/userlist.htm"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>org.springframework.web.servlet.mvc.support.<strong>ControllerClassNameHandlerMapping</strong><br>通过 Controller 的类名找到请求的Controller<br>访问方式: <a href="http://ip:port/project/user" target="_blank" rel="noopener">http://ip:port/project/user</a><br>注：类的首字母要小写</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">AbstractController</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>org.springframework.web.servlet.handler.<strong>BeanNameUrlHandlerMapping</strong><br>通过定义的 beanName 进行查找要请求的Controller<br>访问方式: <a href="http://ip:port/project/users" target="_blank" rel="noopener">http://ip:port/project/users</a><br>注：bean name属性必须要以“/”开头。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userController"</span> <span class="attr">name</span>=<span class="string">"/users"</span> <span class="attr">class</span>=<span class="string">"cn.com.infcn.web.controller.UserController"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>org.springframework.web.servlet.mvc.annotation.<strong>DefaultAnnotationHandlerMapping</strong><br>通过注解 @RequestMapping(“/userlist”) 来查找对应的Controller。  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/userlist"</span>)</span><br><span class="line"><span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">handleRequestInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">    </span><br><span class="line">    userList.add(<span class="keyword">new</span> User(<span class="string">"zhangsan"</span>, <span class="number">18</span>));</span><br><span class="line">    userList.add(<span class="keyword">new</span> User(<span class="string">"list"</span>, <span class="number">16</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"userList"</span>, <span class="string">"users"</span>, userList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HandlerMapping初始化是SpringMVC九大组件初始化总函数initStrategies()中的initHandlerMapping()方法完成的。</p>
+<p>判断detectAllHandlerMappings是否为true，如果为true，则加载当前系统中所有的HandlerMapping类，如果为false，则加载bean名称为“handlermapping”的HandlerMapping实现类。如果还没有找到HandlerMapping，则加载SpvingMVC 配置文件中，默认配置的HandlerMapping。</p>
+<p>以SimpleUrlHandlerMapping 为例，简单分析下HandlerMapping</p>
+<p>从SimpleUrlHandlerMapping 类结构中我们可以发现urlMap属性。这个urlMap中保存了<strong>xml中配置的映射关系</strong>，通过setMappings方法填充到urlMap中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleUrlHandlerMapping</span> <span class="keyword">extends</span> <span class="title">AbstractUrlHandlerMapping</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; urlMap = <span class="keyword">new</span> LinkedHashMap&lt;String, Object&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Map URI paths to handler bean names .</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMappings</span><span class="params">(Properties mappings)</span> </span>&#123;</span><br><span class="line">            CollectionUtils.mergePropertiesIntoMap(mappings, <span class="keyword">this</span>.urlMap);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/userlist.htm"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个urlMap就充当了SpringMVC的路由功能。每个HandlerMapping都会有一个这样的Map。</p>
+<p>当用户请求时，真正的请求会执行到DispatcherServlet的doDispatch()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据请求获取其handler</span></span><br><span class="line"><span class="comment">// handlerMapping解析url得到的controller信息</span></span><br><span class="line">mappedHandler = getHandler(processedRequest, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">	noHandlerFound(processedRequest, response);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过getHandler() 方法去查找HandlerMapping中查找对应的Controller，与拦截器一起封装成HandlerExecutionChain。如果找不到，则执行noHandlerFound() 方法。</p>
+<p>getHandler() 方法: 迭代查找所有的HandlerMapping，如果找到则直接返回。</p>
+<p>noHandlerFound()方法: 如果找不到Controller 则后台抛出异常或响应给前台 404</p>
+<h3><span id="handleradapter">HandlerAdapter</span></h3><p>DispatcherServlte会根据handlerMapping传过来的controller与已经注册好了的HandlerAdapter一一匹配，看哪一种HandlerAdapter是支持该controller类型的，如果找到了其中一种HandlerAdapter是支持传过来的controller类型，那么该HandlerAdapter会调用自己的handle方法，handle方法运用java的反射机制执行controller的具体方法来获得ModelAndView。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">疑惑：不理解为什么通过handlerMapping已经拿到具体的controller了 </span><br><span class="line">为什么还要匹配一个该controller类型的HandlerAdapter通过反射去执行该controller的内容呢？</span><br><span class="line"></span><br><span class="line">回答：因为存在多种类型的controller，不同类型的controller调用方式不同。如果不采用适配器模式，</span><br><span class="line">在DispatcherServlet中就需要出现&quot;判断controller类型-&gt;根据类型完成不同方式的调用&quot;的逻辑，</span><br><span class="line">而加入HandlerAdapter之后，DispatcherServlet只需要为handlerMapping拿到的</span><br><span class="line">具体controller匹配一个适配的controller调用器，接下来只需要调用一个统一的接口方法ha.handle()即可，</span><br><span class="line">具体的不同controller类的不同调用方式交给适配的调用器去完成。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从handlerMapping中根据url拿到对应controller</span></span><br><span class="line">mappedHandler = getHandler(processedRequest, <span class="keyword">false</span>);</span><br><span class="line"><span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">	noHandlerFound(processedRequest, response);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 根据controller类型匹配相应的handleradapter</span></span><br><span class="line">HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line"><span class="comment">// controller实际执行</span></span><br><span class="line">mv = ha.handle(processedRequest, response, mappedHandler.getHandler());</span><br></pre></td></tr></table></figure>
+<p>HandlerAdapter getHandlerAdapter(Object handler)方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> HandlerAdapter <span class="title">getHandlerAdapter</span><span class="params">(Object handler)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (HandlerAdapter ha : <span class="keyword">this</span>.handlerAdapters) &#123;</span><br><span class="line">		<span class="keyword">if</span> (logger.isTraceEnabled()) &#123;</span><br><span class="line">			logger.trace(<span class="string">"Testing handler adapter ["</span> + ha + <span class="string">"]"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (ha.supports(handler)) &#123;</span><br><span class="line">			<span class="keyword">return</span> ha;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">"No adapter for handler ["</span> + handler +</span><br><span class="line">			<span class="string">"]: Does your handler implement a supported interface like Controller?"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HandlerAdapter接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerAdapter</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Given a handler instance, return whether or not this HandlerAdapter can</span></span><br><span class="line"><span class="comment">	 * support it. Typical HandlerAdapters will base the decision on the handler</span></span><br><span class="line"><span class="comment">	 * type. HandlerAdapters will usually only support one handler type each.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;A typical implementation:</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;&lt;code&gt;</span></span><br><span class="line"><span class="comment">	 * return (handler instanceof MyHandler);</span></span><br><span class="line"><span class="comment">	 * &lt;/code&gt;</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler object to check</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> whether or not this object can use the given handler</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(Object handler)</span></span>; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Use the given handler to handle this request.</span></span><br><span class="line"><span class="comment">	 * The workflow that is required may vary widely.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler to use. This object must have previously been passed</span></span><br><span class="line"><span class="comment">	 * to the &lt;code&gt;supports&lt;/code&gt; method of this interface, which must have</span></span><br><span class="line"><span class="comment">	 * returned &lt;code&gt;true&lt;/code&gt;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception in case of errors</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> ModelAndView object with the name of the view and the required</span></span><br><span class="line"><span class="comment">	 * model data, or &lt;code&gt;null&lt;/code&gt; if the request has been handled directly</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">ModelAndView <span class="title">handle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Same contract as for HttpServlet's &lt;code&gt;getLastModified&lt;/code&gt; method.</span></span><br><span class="line"><span class="comment">	 * Can simply return -1 if there's no support in the handler class.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler to use</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the lastModified value for the given handler</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@see</span> javax.servlet.http.HttpServlet#getLastModified</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@see</span> org.springframework.web.servlet.mvc.LastModified#getLastModified</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">long</span> <span class="title">getLastModified</span><span class="params">(HttpServletRequest request, Object handler)</span></span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Handler是用来干活的工具；HandlerMapping用于根据需要干的活找到相应的工具；HandlerAdapter是使用工具干活的人</span><br></pre></td></tr></table></figure>
+<p>参考阅读</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/c92197e1c892" target="_blank" rel="noopener">Spring mvc HandlerMapping 实现机制</a></li>
+<li><a href="https://blog.csdn.net/wangbiao007/article/details/50547020" target="_blank" rel="noopener">第四章 SpringMVC之HandlerAdapter解析</a></li>
+<li><a href="https://my.oschina.net/liughDevelop/blog/1622646" target="_blank" rel="noopener">自己手写一个SpringMVC框架(简化)</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate here.</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Deep WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Deep Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dispatcherServlet/" rel="tag"># dispatcherServlet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/13/SpringMVC-Interceptor/" rel="next" title="SpringMVC-Interceptor">
+                <i class="fa fa-chevron-left"></i> SpringMVC-Interceptor
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/14/mysql-索引/" rel="prev" title="mysql-索引">
+                mysql-索引 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/头像.jpg" alt="Deep">
+            
+              <p class="site-author-name" itemprop="name">Deep</p>
+              <p class="site-description motion-element" itemprop="description">丧向人格, 慢热选手</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/NjustJiaweihan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:njustjiaweihan@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/ba-ye-21" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5106309307" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xyzghio.xyz" title="Aaron Zhu" target="_blank">Aaron Zhu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">HandlerMapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">HandlerAdapter</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">42.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("an5K6gmGlTjR0h1NfD9qUPTE-gzGzoHsz", "Vmx2FnJBOkazj24axAihzsiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
