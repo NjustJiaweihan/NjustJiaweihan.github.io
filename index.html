@@ -996,7 +996,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k
+                  2k
                 </span>
               
 
@@ -1022,75 +1022,14 @@
 
       
         
-          
-            <h3><span id="b-树-balanced-tree">B-树 ( Balanced Tree）</span></h3><p>在计算机科学中，B树是自平衡树数据结构。其保持数据排序，并允许在对数时间内完成搜索、顺序存取、插入和删除。 B树是二叉搜索树的泛化，其节点可以具有多于两个的子节点。</p>
-<p>与自平衡二叉搜索树不同的是，B树针对读取和写入大数据块的系统进行了优化。 B树是外部存储器的数据结构的一个很好的例子。 它通常用于数据库和文件系统。</p>
-<p>上图展示了一种可能的索引方式：</p>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkJehR.png" alt="mkJehR.png"></p>
-<p>左边是数据表，一共有两列七条记录。<br>最左边的是数据记录的物理地址（注意逻辑上相邻的记录在磁盘上也并不是一定物理相邻的）。<br>为了加快 Col2 的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针。这样就可以运用二叉查找在 O(log2n) 的复杂度内获取到相应数据。</p>
-<h3><span id="b树-balanced-tree">B+树 ( Balanced+ Tree）</span></h3><p>B+的特性：</p>
-<ol>
-<li>所有数据都存储在叶子结点的链表中，且链表中的数据都是有序存放的；</li>
-<li>叶子节点间用指针相连。</li>
-<li>不可能在非叶子结点命中；</li>
-<li>非叶子结点相当于是叶子结点的索引，叶子结点相当于是存储数据的数据层；      </li>
-<li>更适合文件索引系统；</li>
-</ol>
-<p>B+的性能：等于在数据集合做一次二分查找；</p>
-<p>一颗二阶的 B+Tree</p>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkJlnO.png" alt="mkJlnO.png"></p>
-<p>与B-Tree的区别：</p>
-<ul>
-<li>B+树只有达到叶子结点才命中。</li>
-<li>B-树可以在非叶子结点命中。</li>
-</ul>
-<p>B+ 树是可变的 n 元树，通常每个节点具有大量子节点。<br>B+ 树由根，内部节点和叶组成。根可以是叶或具有两个或更多个子节点的节点。</p>
-<p>B+ 树可以被视为B树，其中每个（内部）节点仅包含键（不是键值对），并在其底部附加一层链式的叶子节点。</p>
-<p>B +树的主要价值在于存储数据，以便在面向块的存储上下文（特别是文件系统）中进行高效检索。<br>这主要是因为，与二叉搜索树不同的是，B +树具有非常高的扇出（节点中指向 子节点的指针数，通常大约为100或更多），这减少了在树中查找元素所需的I / O操作数。</p>
-<p>B+树索引被广泛应用于数据库、文件系统等场景。顺便说一下，xfs文件系统比ext3/ext4效率高很多的原因之一就是，它的文件及目录索引结构全部采用B+树索引，而ext3/ext4的文件目录结构则采用Linked list, hashed B-tree、Extents/Bitmap等索引数据结构，因此在高I/O压力下，其IOPS能力不如xfs。</p>
-<h3><span id="b树">B*树</span></h3><p>B*树是B+树的变种，相对于B+树他们的不同之处如下：</p>
-<ul>
-<li>首先是关键字个数限制问题，B+树初始化的关键字初始化个数是cei(m/2)，b<em>树的初始化个数为（cei(2/3</em>m)）</li>
-<li>B+树节点满时就会分裂，而B*树节点满时会检查兄弟节点是否满（因为每个节点都有指向兄弟的指针），如果兄弟节点未满则向兄弟节点转移关键字，如果兄弟节点已满，则从当前节点和兄弟节点各拿出1/3的数据创建一个新的节点出来；</li>
-</ul>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkNVAg.jpg" alt="mkNVAg.jpg"></p>
-<p>特点</p>
-<ul>
-<li>在B+树的基础上因其初始化的容量变大，使得节点空间使用率更高</li>
-<li>而又存有兄弟节点的指针，可以向兄弟节点转移关键字的特性使得B*树额分解次数变得更少；</li>
-</ul>
-<hr>
-<p>创建索引可以大大提高系统的性能：</p>
-<ul>
-<li>可以显著提升数据的检索速度，这也是创建索引的最主要的原因。</li>
-<li>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</li>
-<li>可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。</li>
-<li>在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。</li>
-<li>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。 </li>
-</ul>
-<p>增加索引也有许多不利的方面：</p>
-<ul>
-<li>创建索引和维护索引要耗费时间。这种时间随着数据量的增加而增加。</li>
-<li>索引需要占物理空间。除了数据表占数据空间之外，每一个索引还要占一定的物理空间。如果要建立聚簇索引，那么需要的空间就会更大。</li>
-<li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</li>
-</ul>
-<p>根据数据库的功能，可以在数据库设计器中创建三种索引：唯一索引、主键索引和聚集索引。</p>
-<h3><span id="索引的实现之hash-索引">索引的实现之：Hash 索引</span></h3><p>哈希索引采用哈希算法，把键值换算成哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可立刻定位到相应的位置，速度非常快。</p>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkJdjf.jpg" alt="mkJdjf.jpg"></p>
-<p>从上面的图来看，B+树索引和哈希索引的明显区别是：</p>
-<ul>
-<li>如果是等值查询，那么哈希索引明显有绝对优势。<br>因为只需要经过一次算法即可找到相应的键值；当然了，这个前提是，键值都是唯一的。如果键值不是唯一的，就需要先找到该键所在位置，然后再根据链表往后扫描，直到找到相应的数据；</li>
-<li>如果是范围查询检索，这时候哈希索引就毫无用武之地了。<br>因为原先是有序的键值，经过哈希算法后，有可能变成不连续的了，就没办法再利用索引完成范围查询检索；哈希索引也没办法利用索引完成排序，以及like ‘xxx%’ 这样的部分模糊查询（这种部分模糊查询，其实本质上也是范围查询）；</li>
-<li>哈希索引也不支持多列联合索引的最左匹配规则；<br>B+树索引的关键字检索效率比较平均，不像B树那样波动幅度大，在有大量重复键值情况下，哈希索引的效率也是极低的，因为存在所谓的哈希碰撞问题。</li>
-</ul>
-<h3><span id="b树索引">B+树索引</span></h3><p>数据库中的B+树索引可以分为聚集索引和非聚集索引 都是B+树实现的 高度平衡 叶子结点存放的都是数据 不同的是聚集索引叶子结点存放的是一条完整行记录 非聚集索引叶子结点存放的是主键字段。</p>
-<p>如果某个字段的取值范围很广，几乎没有重复性，即高选择性，只会选中很少一部分行记录时x，此时适合B+树索引。</p>
-<h3><span id="聚集索引">聚集索引</span></h3><p>数据页结点存放的是完整行记录 非数据页结点存放的是键值(主键字段)以及指向数据页的偏移量</p>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkBqGF.jpg" alt="mkBqGF.jpg"></p>
-<h3><span id="辅助索引">辅助索引</span></h3><p>叶子结点除了键值以外 还包含一个书签 也就是需要找的行记录的聚集索引键</p>
-<p><img src="https://s2.ax1x.com/2019/08/14/mkrSyj.jpg" alt="mkrSyj.jpg"></p>
-
-          
+          <p>《InnoDB存储引擎》阅读笔记</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/14/mysql-索引/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1259,80 +1198,14 @@
 
       
         
-          
-            <p>SpringMVC整体运行机制</p>
-<p><img src="https://s2.ax1x.com/2019/08/13/mCipvD.jpg" alt="mCipvD.jpg"></p>
-<ul>
-<li><p>用户发送请求至前端控制器DispatcherServlet</p>
-</li>
-<li><p>DispatcherServlet收到请求调用HandlerMapping处理器映射器。</p>
-</li>
-<li><p>处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet。</p>
-</li>
-<li><p>DispatcherServlet通过HandlerAdapter处理器适配器调用处理器</p>
-</li>
-<li><p>执行处理器(Controller，也叫后端控制器)。</p>
-</li>
-<li><p>Controller执行完成返回ModelAndView</p>
-</li>
-<li><p>HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet</p>
-</li>
-<li><p>DispatcherServlet将ModelAndView传给ViewReslover视图解析器</p>
-</li>
-<li><p>ViewReslover解析后返回具体View</p>
-</li>
-<li><p>DispatcherServlet对View进行渲染视图（即将模型数据填充至视图中）。</p>
-</li>
-<li><p>DispatcherServlet响应用户。</p>
-</li>
-</ul>
-<p>从上面可以看出，DispatcherServlet有接收请求，响应结果，转发等作用。有了DispatcherServlet之后，可以减少组件之间的耦合度。</p>
-<h3><span id="handlermapping">HandlerMapping</span></h3><p>当DispatcherServlet接受到客户端的请求后，SpringMVC 通过 HandlerMapping 找到请求的Controller HandlerMapping 在这里起到<strong>路由</strong>的作用，负责找到请求的Controller。</p>
-<p>Spring MVC 默认提供了4种 HandlerMapping的实现</p>
-<ul>
-<li>org.springframework.web.servlet.handler.<strong>SimpleUrlHandlerMapping</strong><br>通过配置请求路径和Controller映射建立关系，找到相应的Controller<br>访问方式: <a href="http://ip:port/project/userlist.htm" target="_blank" rel="noopener">http://ip:port/project/userlist.htm</a></li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/userlist.htm"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>org.springframework.web.servlet.mvc.support.<strong>ControllerClassNameHandlerMapping</strong><br>通过 Controller 的类名找到请求的Controller<br>访问方式: <a href="http://ip:port/project/user" target="_blank" rel="noopener">http://ip:port/project/user</a><br>注：类的首字母要小写</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">AbstractController</span></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>org.springframework.web.servlet.handler.<strong>BeanNameUrlHandlerMapping</strong><br>通过定义的 beanName 进行查找要请求的Controller<br>访问方式: <a href="http://ip:port/project/users" target="_blank" rel="noopener">http://ip:port/project/users</a><br>注：bean name属性必须要以“/”开头。</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userController"</span> <span class="attr">name</span>=<span class="string">"/users"</span> <span class="attr">class</span>=<span class="string">"cn.com.infcn.web.controller.UserController"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>org.springframework.web.servlet.mvc.annotation.<strong>DefaultAnnotationHandlerMapping</strong><br>通过注解 @RequestMapping(“/userlist”) 来查找对应的Controller。  </li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/userlist"</span>)</span><br><span class="line"><span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">handleRequestInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;User&gt;();</span><br><span class="line">    </span><br><span class="line">    userList.add(<span class="keyword">new</span> User(<span class="string">"zhangsan"</span>, <span class="number">18</span>));</span><br><span class="line">    userList.add(<span class="keyword">new</span> User(<span class="string">"list"</span>, <span class="number">16</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"userList"</span>, <span class="string">"users"</span>, userList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>HandlerMapping初始化是SpringMVC九大组件初始化总函数initStrategies()中的initHandlerMapping()方法完成的。</p>
-<p>判断detectAllHandlerMappings是否为true，如果为true，则加载当前系统中所有的HandlerMapping类，如果为false，则加载bean名称为“handlermapping”的HandlerMapping实现类。如果还没有找到HandlerMapping，则加载SpvingMVC 配置文件中，默认配置的HandlerMapping。</p>
-<p>以SimpleUrlHandlerMapping 为例，简单分析下HandlerMapping</p>
-<p>从SimpleUrlHandlerMapping 类结构中我们可以发现urlMap属性。这个urlMap中保存了<strong>xml中配置的映射关系</strong>，通过setMappings方法填充到urlMap中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleUrlHandlerMapping</span> <span class="keyword">extends</span> <span class="title">AbstractUrlHandlerMapping</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; urlMap = <span class="keyword">new</span> LinkedHashMap&lt;String, Object&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Map URI paths to handler bean names .</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMappings</span><span class="params">(Properties mappings)</span> </span>&#123;</span><br><span class="line">            CollectionUtils.mergePropertiesIntoMap(mappings, <span class="keyword">this</span>.urlMap);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/userlist.htm"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这个urlMap就充当了SpringMVC的路由功能。每个HandlerMapping都会有一个这样的Map。</p>
-<p>当用户请求时，真正的请求会执行到DispatcherServlet的doDispatch()方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据请求获取其handler</span></span><br><span class="line"><span class="comment">// handlerMapping解析url得到的controller信息</span></span><br><span class="line">mappedHandler = getHandler(processedRequest, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">	noHandlerFound(processedRequest, response);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过getHandler() 方法去查找HandlerMapping中查找对应的Controller，与拦截器一起封装成HandlerExecutionChain。如果找不到，则执行noHandlerFound() 方法。</p>
-<p>getHandler() 方法: 迭代查找所有的HandlerMapping，如果找到则直接返回。</p>
-<p>noHandlerFound()方法: 如果找不到Controller 则后台抛出异常或响应给前台 404</p>
-<h3><span id="handleradapter">HandlerAdapter</span></h3><p>DispatcherServlte会根据handlerMapping传过来的controller与已经注册好了的HandlerAdapter一一匹配，看哪一种HandlerAdapter是支持该controller类型的，如果找到了其中一种HandlerAdapter是支持传过来的controller类型，那么该HandlerAdapter会调用自己的handle方法，handle方法运用java的反射机制执行controller的具体方法来获得ModelAndView。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">疑惑：不理解为什么通过handlerMapping已经拿到具体的controller了 </span><br><span class="line">为什么还要匹配一个该controller类型的HandlerAdapter通过反射去执行该controller的内容呢？</span><br><span class="line"></span><br><span class="line">回答：因为存在多种类型的controller，不同类型的controller调用方式不同。如果不采用适配器模式，</span><br><span class="line">在DispatcherServlet中就需要出现&quot;判断controller类型-&gt;根据类型完成不同方式的调用&quot;的逻辑，</span><br><span class="line">而加入HandlerAdapter之后，DispatcherServlet只需要为handlerMapping拿到的</span><br><span class="line">具体controller匹配一个适配的controller调用器，接下来只需要调用一个统一的接口方法ha.handle()即可，</span><br><span class="line">具体的不同controller类的不同调用方式交给适配的调用器去完成。</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从handlerMapping中根据url拿到对应controller</span></span><br><span class="line">mappedHandler = getHandler(processedRequest, <span class="keyword">false</span>);</span><br><span class="line"><span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">	noHandlerFound(processedRequest, response);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 根据controller类型匹配相应的handleradapter</span></span><br><span class="line">HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line"><span class="comment">// controller实际执行</span></span><br><span class="line">mv = ha.handle(processedRequest, response, mappedHandler.getHandler());</span><br></pre></td></tr></table></figure>
-<p>HandlerAdapter getHandlerAdapter(Object handler)方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> HandlerAdapter <span class="title">getHandlerAdapter</span><span class="params">(Object handler)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (HandlerAdapter ha : <span class="keyword">this</span>.handlerAdapters) &#123;</span><br><span class="line">		<span class="keyword">if</span> (logger.isTraceEnabled()) &#123;</span><br><span class="line">			logger.trace(<span class="string">"Testing handler adapter ["</span> + ha + <span class="string">"]"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (ha.supports(handler)) &#123;</span><br><span class="line">			<span class="keyword">return</span> ha;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">"No adapter for handler ["</span> + handler +</span><br><span class="line">			<span class="string">"]: Does your handler implement a supported interface like Controller?"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>HandlerAdapter接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerAdapter</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Given a handler instance, return whether or not this HandlerAdapter can</span></span><br><span class="line"><span class="comment">	 * support it. Typical HandlerAdapters will base the decision on the handler</span></span><br><span class="line"><span class="comment">	 * type. HandlerAdapters will usually only support one handler type each.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;A typical implementation:</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;&lt;code&gt;</span></span><br><span class="line"><span class="comment">	 * return (handler instanceof MyHandler);</span></span><br><span class="line"><span class="comment">	 * &lt;/code&gt;</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler object to check</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> whether or not this object can use the given handler</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(Object handler)</span></span>; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Use the given handler to handle this request.</span></span><br><span class="line"><span class="comment">	 * The workflow that is required may vary widely.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler to use. This object must have previously been passed</span></span><br><span class="line"><span class="comment">	 * to the &lt;code&gt;supports&lt;/code&gt; method of this interface, which must have</span></span><br><span class="line"><span class="comment">	 * returned &lt;code&gt;true&lt;/code&gt;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception in case of errors</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> ModelAndView object with the name of the view and the required</span></span><br><span class="line"><span class="comment">	 * model data, or &lt;code&gt;null&lt;/code&gt; if the request has been handled directly</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">ModelAndView <span class="title">handle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Same contract as for HttpServlet's &lt;code&gt;getLastModified&lt;/code&gt; method.</span></span><br><span class="line"><span class="comment">	 * Can simply return -1 if there's no support in the handler class.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> handler handler to use</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the lastModified value for the given handler</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@see</span> javax.servlet.http.HttpServlet#getLastModified</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@see</span> org.springframework.web.servlet.mvc.LastModified#getLastModified</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">long</span> <span class="title">getLastModified</span><span class="params">(HttpServletRequest request, Object handler)</span></span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Handler是用来干活的工具；HandlerMapping用于根据需要干的活找到相应的工具；HandlerAdapter是使用工具干活的人</span><br></pre></td></tr></table></figure>
-<p>参考阅读</p>
-<ul>
-<li><a href="https://www.jianshu.com/p/c92197e1c892" target="_blank" rel="noopener">Spring mvc HandlerMapping 实现机制</a></li>
-<li><a href="https://blog.csdn.net/wangbiao007/article/details/50547020" target="_blank" rel="noopener">第四章 SpringMVC之HandlerAdapter解析</a></li>
-<li><a href="https://my.oschina.net/liughDevelop/blog/1622646" target="_blank" rel="noopener">自己手写一个SpringMVC框架(简化)</a></li>
-</ul>
-
-          
+          <p>SpringMVC整体运行机制</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/13/SpringMVC-dispatcherServlet/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
