@@ -666,7 +666,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  512
+                  521
                 </span>
               
 
@@ -692,44 +692,14 @@
 
       
         
-          
-            <p>InnoDB存储引擎的行级锁：</p>
-<ul>
-<li>共享锁：允许事务读一行</li>
-<li>排他锁：允许事务更新或者删除一行</li>
-</ul>
-<p>表锁意向锁 主要是为了在一个事务中揭示下一行将被请求的锁的类型</p>
-<ul>
-<li>意向共享锁：事务想要获得一个表中某几行的共享锁</li>
-<li>意向排他锁：事务想要获得一个表中某几行的排他锁</li>
-</ul>
-<h3><span id="非锁定一致性读">非锁定一致性读</span></h3><p>默认情况下InnoDB的select使用非锁定一致性读</p>
-<p>一致性的非锁定行读是指InnoDB存储引擎通过行多版本控制的方式来读取当前执行时间数据库中的行数据 即如果被读取行上正在进行delete或者update操作 此时的读取操作不用等待其行锁释放 而是读取该行的一个快照数据。</p>
-<p>快照数据其实就是该行数据的历史版本 可能有多个版本 这种技术称为行多版本技术 由此带来的是多版本并发控制(MVCC)</p>
-<p>但在不同的事务隔离级别下 读取的方式不一样 在read committed隔离级别下 非锁定一致性读总是读取该行的最新快照 而repeatable read总数读取事务开始时的行数据快照。</p>
-<p><img src="https://s2.ax1x.com/2019/08/15/mAvMeH.jpg" alt="mAvMeH.jpg"></p>
-<p>对于read committed隔离级别 总是读取快照的最新版本 所以是</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Empty <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
-<p>对于repeatable read总数读取事务开始时的快照版本</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id = 1</span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
-<h3><span id="锁的算法">锁的算法</span></h3><ul>
-<li>record lock: 单个行记录上的锁</li>
-<li>gap lock: 间隙锁 锁定一个范围 不包括记录本身</li>
-<li>Next-key lock: 锁定一个范围 并且锁定记录本身</li>
-</ul>
-<h3><span id="锁带来的三种问题">锁带来的三种问题</span></h3><ul>
-<li>丢失更新</li>
-</ul>
-<p><img src="https://s2.ax1x.com/2019/08/15/mECtlq.jpg" alt="mECtlq.jpg"></p>
-<ul>
-<li>脏读</li>
-</ul>
-<p>脏页指缓冲池中已经被修改的页还没刷到磁盘 但日志都已经被写入重做日志中<br>脏数据指缓冲池中被修改的数据 并且还没有被提交</p>
-<ul>
-<li>不可重复读</li>
-</ul>
-
-          
+          <p>《InnoDB存储引擎》阅读笔记</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/15/Mysql-锁/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -876,58 +846,14 @@
 
       
         
-          
-            <p>事务会把数据库从一种一致性状态转换为另一种一致性状态，在数据库提交工作时可以确保其要么所有修改都保存了 要么所有修改都不保存。</p>
-<p>事务四个特性：</p>
-<ul>
-<li>原子性：整个数据库中事务是不可分割的 事务中全部sql语句执行成功 才算整个事务完成 任何一个sql执行失败 该事务之前的所有sql都要撤回 数据库状态退回到该事务执行之前的状态。</li>
-<li>一致性：事务将数据库从一种一致性状态转移到另一种一致性状态 数据库的完整性约束不能被破坏。</li>
-<li>隔离性：一个事务对数据库状态的影响在该事务提交前对其他事物不可见，通过锁机制来实现。</li>
-<li>持久性：事务一旦提交就是永久性的 就算宕机也可以恢复</li>
-</ul>
-<p>误解：undo用于将数据库物理地恢复到执行语句或者事务之前的状态</p>
-<p>实际上：InnoDB引擎回滚时，它实际上做的是与之前相反的工作，对于每个insert执行delete，对每个delete执行insert，对每个update执行相反的update。</p>
-<p>事务控制语句：</p>
-<ul>
-<li>start transaction 显式的开启一个事务</li>
-<li>commit 提交事务</li>
-<li>rollback 回滚事务</li>
-<li>savepoint p1 创建一个保存点</li>
-<li>release savepoint p1 删除一个保存点</li>
-<li>rollback to [savepoint] 回滚事务到指定保存点</li>
-<li>set transaction read uncommitted/read committed/repeatable read/serializable</li>
-</ul>
-<p>InnoDB存储引擎默认的隔离级别式epeatable read。</p>
-<h3><span id="事务的隔离性">事务的隔离性</span></h3><p>　　MySQL数据库针对这四种特性，为我们提供的四种隔离级别，这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。</p>
-<p>　　1、Read uncommitted 读未提交<strong>(读取到未提交的事务对数据库的影响)</strong></p>
-<p>　　公司发工资了，把50000元打到我的账号上，但是该事务并未提交，而我正好去查看账户，发现工资已经到账，是50000元整，非常高兴。可是不幸的是，领导发现发给的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后我实际的工资只有2000元，空欢喜一场。</p>
-<p>　　脏读是两个并发的事务，“事务A：领导发工资”、“事务B：我查询工资账户”，事务B读取了事务A尚未提交的数据。</p>
-<p>　　当隔离级别设置为Read uncommitted时，就可能出现脏读，如何避免脏读，请看下一个隔离级别。</p>
-<p>　　2、Read committed 读提交</p>
-<p>　　我拿着工资卡去消费，系统读取到卡里确实有2000元，而此时老婆也正好在网上转账，把工资卡的2000元转到她账户，并在我之前提交了事务，当我扣款时，系统检查到工资卡已经没有钱，扣款失败，十分纳闷，明明卡里有钱，为何……</p>
-<p>　　不可重复读是两个并发的事务，“事务A：消费”、“事务B：老婆网上转账”，事务A事先读取了数据，事务B紧接了更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了改变。</p>
-<p>　　当隔离级别设置为Read committed时，避免了脏读，但是可能会造成不可重复读。</p>
-<p>　　3、Repeatable read 重复读</p>
-<p>　　当隔离级别设置为Repeatable read时，可以避免不可重复读。当我拿着工资卡去消费时，一旦系统开始读取工资卡信息（即事务开始），我老婆就不可能对该记录进行修改，也就是不能在此时转账。</p>
-<p>　　虽然Repeatable read避免了不可重复读，但还有可能出现幻读。例如：老婆工作在银行部门，她时常通过银行内部系统查看我的信用卡消费记录。有一天，她正查询到我当月信用卡的总消费金额（select sum(amount) from transaction where month = 本月）为80元，而我此时正好在外面吃完大餐后在收银台买单，消费1000元，即新增了一条1000元的消费记录（insert transaction … ），并提交了事务，随后老婆将我的当月信用卡消费的明细打印到A4纸上，却发现消费总额为1080元，老婆很诧异，以为出现了幻觉，幻读就这样产生了。</p>
-<p>　　注：MySQL的默认隔离级别就是Repeatable read。</p>
-<p>总结：</p>
-<p>　　·Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</p>
-<p>　　·Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</p>
-<p>　　·Read committed (读已提交)：可避免脏读的发生。</p>
-<p>　　·Read uncommitted (读未提交)：最低级别，任何情况都无法保证。</p>
-<p>　　以上四种隔离级别最高的是Serializable级别，最低的是Read uncommitted级别，级别越高，执行效率就越低。像Serializable这样的级别，就是以锁表的方式(类似于Java多线程中的锁)使得其他的线程只能在锁外等待，所以平时选用何种隔离级别应该根据实际情况。在MySQL数据库中默认的隔离级别为Repeatable read (可重复读)。</p>
-<p>　　在MySQL数据库中，支持上面四种隔离级别，默认的为Repeatable read (可重复读)；而在Oracle数据库中，只支持Serializable (串行化)级别和Read committed (读已提交)这两种级别，其中默认的为Read committed级别。</p>
-<p>　　在MySQL数据库中查看当前事务的隔离级别：</p>
-<p>　　1select @@tx_isolation;</p>
-<p>　　在MySQL数据库中设置事务的隔离 级别：</p>
-<p>　　1set [glogal session] transactionisolationlevel 隔离级别名称;</p>
-<h3><span id="分布式事务">分布式事务</span></h3><p>分布式事务允许多个独立的数据库参与到一个全局事务中来 分布式事务在银行业务中比较常见 比如一个用户需要从上海转账1000元到北京的账户上 这种情况下一定需要分布式事务 要么上海账户扣钱同时北京账户加钱 要么上海账户不扣钱同时北京账户不加钱。</p>
-<h3><span id="不好的事务习惯">不好的事务习惯</span></h3><ul>
-<li>循环中提交事务</li>
-</ul>
-
-          
+          <p>《InnoDB存储引擎》阅读笔记</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/15/Mysql-事务/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2311,7 +2237,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">42.8k</span>
+    <span title="Site words total count">42.9k</span>
   
 </div>
 
